@@ -1,0 +1,32 @@
+Navigointipalkki:
+-Pääsivu
+-Käyttäjät
+-Oma profiili
+-Kirjaudu sisään/ Kirjaudu ulos
+
+Pääsivu:
+-Luettelo meemeistä. Jokaisesta meemistä näytetään otsikko, media, lisääjä, lisäyspvm, tykkäykset.
+Kommentit saadaan erikseen näkyviin.
+-Palkki, jolla valitaan minkä mukaan meemit lajitellaan. Alustavasti uusimman mukaan mutta voidaan vaihtaa
+näyttämään ensin eniten ääniä saanut.
+
+Käyttäjät:
+-Lista kaikista käyttäjistä, sisältää hakupalkin. Käyttäjää painaessa pääsee tarkastelemaan
+kyseisen käyttäjän profiilisivua. 
+
+-Profiilisivu:
+Näyttää käyttäjän avatarin, liittymisajan, lisätyt meemit sekä muut tiedot.
+
+
+
+
+
+Toteutusvaiheet Frontendille:
+1. Luodaan servicet, jotka mahdollistaa tarvittavien HTTP pyyntöjen tekemisen.
+2. Luodaan reducerit.
+3. Luodaan komponentti meemille
+4. Pääsivu toimimaan.
+5. Komponentti käyttäjälle
+6. Käyttäjät-sivu toimimaan
+7. Profiilisivu toimimaan
+.....
