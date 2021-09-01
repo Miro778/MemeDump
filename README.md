@@ -12,3 +12,4 @@ todo
 |      | 2,5  | Aloitettu Front endin toteutus. Sovellus osaa nyt hakea back endistä meemit ja käyttäjät HTTP-pyynnöillä, ja tallettaa ne storeen. |
 | 31.8 | 5    | Tutustuttu material-ui:n ominaisuuksiin käyttöliittymän toteutusta varten. Toteutettu sisäänkirjautumissivu, pääsivu ja navigointipalkki material-ui:n avulla. 
 |      |      | Lisäksi toteutettu mahdollisuus lisätä postauksia sovelluksessa ilman kovakoodausta. |
+| 1.9  |  3   | Lisätty sivu joka näyttää kaikkien käyttäjien listan ja lisätty sivu yksittäisen käyttäjän profiilin tarkasteluun |
