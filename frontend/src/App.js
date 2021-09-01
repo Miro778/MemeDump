@@ -10,6 +10,7 @@ import { setNotification } from './reducers/notificationReducer'
 import loggedReducer, { logIn, logOut } from './reducers/loggedReducer'
 import { initializeMemes,createMeme } from './reducers/memeReducer'
 import { useSelector, useDispatch } from 'react-redux'
+import User from './components/User'
 import {
   BrowserRouter as Router,
   useRouteMatch, useHistory,
@@ -17,7 +18,7 @@ import {
 } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 import { TableContainer, Table, TableCell, TableRow, TableBody, Paper, TextField, Button, AppBar, Toolbar, IconButton, List, Divider, ListItem, ListItemAvatar,
-ListItemText, makeStyles, ImageListItem, ImageList, ImageListItemBar } from '@material-ui/core'
+ListItemText, makeStyles, ImageListItem, ImageList, ImageListItemBar, Avatar } from '@material-ui/core'
 import ChatIcon from '@material-ui/icons/Chat';
 import { Alert } from '@material-ui/lab'
 
@@ -39,7 +40,7 @@ const Menu = (props) => {
         <Button color="inherit" component={Link} to="/users">
           Users
         </Button>
-        <Button color="inherit" component={Link} to="/profile">
+        <Button color="inherit" component={Link} to={`/profile/${window.localStorage.getItem('loggedMemeAppUser').username}`}>
           My profile
         </Button>
         <Button color="inherit" onClick={props.handleLogout}>Logout </Button>
@@ -84,7 +85,7 @@ const App = () => {
         username, password,
       })
       window.localStorage.setItem(
-        'loggedBlogAppUser', JSON.stringify(user)
+        'loggedMemeAppUser', JSON.stringify(user)
       )
       memeService.setToken(user.token)
       dispatch(logIn(user))
@@ -98,6 +99,7 @@ const App = () => {
         setErrorMessage(null)
       }, 3000)
     }
+
   }
 
   const handleLogout = async () => {
@@ -106,17 +108,6 @@ const App = () => {
     window.localStorage.removeItem('loggedMemeAppUser')
     dispatch(logOut())
     window.location.reload()
-  }
-
-  const Error = ({ message }) => {
-    if (message === null) {
-      return null
-    }
-    return (
-      <div className="error">
-        {message}
-      </div>
-    )
   }
 
   const addMeme = async (event) => {
@@ -177,6 +168,33 @@ const App = () => {
     )
   }
 
+  const Error = ({ message }) => {
+    if (message === null) {
+      return null
+    }
+    return (
+      <div className="error">
+        {message}
+      </div>
+    )
+  }
+
+  const Notification = ({ message }) => {
+    if (message === '') {
+      return null
+    }
+
+    return (
+      <div>
+        {(message &&
+<Alert severity="success">
+  {message}
+</Alert>
+        )}
+      </div>
+    )
+  }
+
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -233,8 +251,10 @@ const App = () => {
 
     <h1>MemeDump</h1>
 
+    <Notification message={noteMessage} />
+
     <Menu handleLogout={handleLogout} />
-    
+  <Switch>
   <Route path="/memes">
   <ImageList rowHeight={180} className={classes.imageList}>
     {memes.map(meme =>
@@ -256,6 +276,29 @@ const App = () => {
   </Route>
 
   <Route path="/newpost"><NewPost></NewPost></Route>
+  
+  <Route path="/profile/:id">
+            <User users={users} />
+  </Route>
+
+  <Route path="/users">
+  <TableContainer component={Paper}>
+              <Table>
+                <TableBody>
+                  {users.map(user =>
+                    <TableRow key={user.id}>
+                      <TableCell>
+                        <p><Avatar alt={user.username} src={user.avatar} /><Link to={`../profile/${user.id}`}>{user.username}</Link></p>
+                      </TableCell>
+                      <TableCell>posts: {user.memes.length}</TableCell>
+                      <TableCell>joined in {user.joined}</TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+  </Route>
+  </Switch>
   </Router>
   </Container>
    )
