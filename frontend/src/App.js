@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Meme from './components/Meme'
 // import MemeInfo from './components/MemeInfo'
-// import User from './components/User'
 import memeService from './services/memes'
 import loginService from './services/login'
 import './index.css'
@@ -18,14 +17,31 @@ import {
 } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 import { TableContainer, Table, TableCell, TableRow, TableBody, Paper, TextField, Button, AppBar, Toolbar, IconButton, List, Divider, ListItem, ListItemAvatar,
-ListItemText, makeStyles, ImageListItem, ImageList, ImageListItemBar, Avatar } from '@material-ui/core'
+ListItemText, makeStyles, ImageListItem, ImageList, ImageListItemBar, Avatar, createTheme } from '@material-ui/core'
 import ChatIcon from '@material-ui/icons/Chat';
 import { Alert } from '@material-ui/lab'
 
 const Menu = (props) => {
+  const logged = useSelector(state => state.loggedIn)
+  const users = useSelector(state => state.users)
+  const username = logged.username
+  let thisUser = {
+    username: '0'
+  }
+
+  for (var i = 0;i < users.length;i++)
+  {
+    if (username === users[i].username) {
+      thisUser = users[i]
+      console.log(`Current user: ${thisUser.username}`)
+      break
+    }
+  }
+
   const padding = {
     padding: 50
   }
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -40,7 +56,7 @@ const Menu = (props) => {
         <Button color="inherit" component={Link} to="/users">
           Users
         </Button>
-        <Button color="inherit" component={Link} to={`/profile/${window.localStorage.getItem('loggedMemeAppUser').username}`}>
+        <Button color="inherit" component={Link} to={`/profile/${thisUser.id}`}>
           My profile
         </Button>
         <Button color="inherit" onClick={props.handleLogout}>Logout </Button>
@@ -62,6 +78,7 @@ const App = () => {
   const noteMessage = useSelector(state => state.notification)
   const users = useSelector(state => state.users)
   const memes = useSelector(state => state.memes)
+
 
   useEffect(() => {
     dispatch(initializeMemes())
