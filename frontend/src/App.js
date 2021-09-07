@@ -17,9 +17,11 @@ import {
 } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 import { TableContainer, Table, TableCell, TableRow, TableBody, Paper, TextField, Button, AppBar, Toolbar, IconButton, List, Divider, ListItem, ListItemAvatar,
-ListItemText, makeStyles, ImageListItem, ImageList, ImageListItemBar, Avatar, createTheme } from '@material-ui/core'
+ListItemText, makeStyles, ImageListItem, ImageList, ImageListItemBar, Avatar, createTheme, ThemeProvider } from '@material-ui/core'
 import ChatIcon from '@material-ui/icons/Chat';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { Alert } from '@material-ui/lab'
+import { green, orange, purple } from '@material-ui/core/colors';
 
 const Menu = (props) => {
   const logged = useSelector(state => state.loggedIn)
@@ -94,6 +96,17 @@ const App = () => {
     }
   }, [])
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: orange[500],
+      },
+      secondary: {
+        main: green[500],
+      },
+    },
+  });
+
   const handleLogin = async (event) => {
     event.preventDefault()
 
@@ -160,8 +173,7 @@ const App = () => {
         <h2>Make a post</h2>
         <form onSubmit={addMeme}>
           <div>
-      Title
-            <input
+            <TextField label="Title"
               id='titleField'
               type="text"
               value={newTitle}
@@ -169,9 +181,8 @@ const App = () => {
               onChange={({ target }) => setNewTitle(target.value)}
             />
           </div>
-          <div>
-      Image link (URL)
-            <input
+          <div>     
+            <TextField label ="Image link (URL)"
               id='urlField'
               type="text"
               value={newMedia}
@@ -179,7 +190,7 @@ const App = () => {
               onChange={({ target }) => setNewMedia(target.value)}
             />
           </div>
-          <button id='submitMeme-button' type="submit">create</button>
+          <Button variant="contained" color="primary" id='submitMeme-button' type="submit">create</Button>
         </form>
       </div>
     )
@@ -263,6 +274,7 @@ const App = () => {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <Container>
     <Router>
 
@@ -281,9 +293,10 @@ const App = () => {
               title={meme.title}
               subtitle={<span>by {meme.user.username} on {meme.date}</span>}
               actionIcon={
-                <IconButton aria-label={`View comments`} className={classes.icon}>
-                  <ChatIcon />
-                </IconButton>
+                <IconButton aria-label={`Like`} className={classes.icon}>
+                  <ThumbUpIcon />
+                  <span> {meme.likes} likes </span>
+                </IconButton> 
               }
             />
       </ImageListItem>
@@ -318,6 +331,7 @@ const App = () => {
   </Switch>
   </Router>
   </Container>
+  </ThemeProvider>
    )
 }
 
