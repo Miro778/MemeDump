@@ -13,4 +13,5 @@ todo
 | 31.8 | 5    | Tutustuttu material-ui:n ominaisuuksiin käyttöliittymän toteutusta varten. Toteutettu sisäänkirjautumissivu, pääsivu ja navigointipalkki material-ui:n avulla. 
 |      |      | Lisäksi toteutettu mahdollisuus lisätä postauksia sovelluksessa ilman kovakoodausta. |
 | 1.9  |  3   | Lisätty sivu joka näyttää kaikkien käyttäjien listan ja lisätty sivu yksittäisen käyttäjän profiilin tarkasteluun |
-| 3.9  |  2   | Korjattu 'My Profile'-linkki toimimaan kaikilla käyttäjillä. Tutustuttu mahdollisuuksiin material-ui:n avulla muuttaa navigointipalkin tyyliä. | 
+| 3.9  |  2   | Korjattu 'My Profile'-linkki toimimaan kaikilla käyttäjillä. Tutustuttu mahdollisuuksiin material-ui:n avulla muuttaa navigointipalkin tyyliä. |
+| 7.9  |  2   | Päivitetty material-ui:lla käyttöliittymästä seuraavia asioita: Teema, uuden postauksen lisäyssivu, postauksen like-painike |
