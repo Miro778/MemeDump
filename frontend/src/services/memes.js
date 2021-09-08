@@ -47,7 +47,10 @@ const vote = async (meme) => {
 }
 
 const addComment = async (meme, comment) => {
-  const response = await axios.post(`${baseUrl}/${meme.id}/comments`,comment)
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.post(`${baseUrl}/${meme.id}/comments`, comment, config)
   return response.data
 }
 

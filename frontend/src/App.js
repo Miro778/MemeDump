@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Meme from './components/Meme'
-// import MemeInfo from './components/MemeInfo'
+import MemeInfo from './components/MemeInfo'
 import memeService from './services/memes'
 import loginService from './services/login'
 import './index.css'
@@ -284,13 +284,16 @@ const App = () => {
 
     <Menu handleLogout={handleLogout} />
   <Switch>
+  <Route path="/memes/:id">
+      <MemeInfo memes={memes} />
+  </Route>
   <Route path="/memes">
   <ImageList rowHeight={180} className={classes.imageList}>
     {memes.map(meme =>
       <ImageListItem key={meme.id} cols={2} style={{ height: 'auto' }}>
             <img src={meme.media} alt={meme.title} />
             <ImageListItemBar
-              title={meme.title}
+              title={<span><Link to={`../memes/${meme.id}`}>{meme.title}</Link></span>}
               subtitle={<span>by {meme.user.username} on {meme.date}</span>}
               actionIcon={
                 <IconButton aria-label={`Like`} className={classes.icon}>

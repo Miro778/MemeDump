@@ -17,6 +17,9 @@ const memeReducer = (state = [], action) => {
     return state.map(meme =>
       meme.id !== id ? meme : changedMeme
     )
+    case 'COMMENT':
+      console.log('action.data: ' , action.data)
+      return [...state, action.data]
   default:
     return state
   }
@@ -27,6 +30,16 @@ export const addVote = (id,meme) => {
     dispatch({
       type: 'VOTE',
       data: { id }
+    })
+  }
+}
+
+export const addComment = (meme,comment) => {
+  return async dispatch => {
+    const newComment = await memeService.addComment(meme, comment)
+    dispatch({
+      type: 'COMMENT',
+      data: newComment
     })
   }
 }
