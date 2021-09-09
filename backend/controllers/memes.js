@@ -76,8 +76,27 @@ memesRouter.get('/', async (request, response) => {
   })
 
   memesRouter.post('/:id/comments', async (request, response) => {
+
+    var today = new Date(),
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    const token = getTokenFrom(request)
+    console.log('Token from request: ', token)
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    console.log('Decoded token: ', decodedToken)
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }
+    const user = await User.findById(decodedToken.id)
+
     console.log('request.body of the comment: ' , request.body)
-    const comment = request.body
+    const comment = {
+      content: request.body.content,
+      date: date,
+      user: user.username,
+      avatar: user.avatar
+    }
+
     console.log('adding comment: ' , comment)
     const meme = await Meme.findById(request.params.id)
     console.log('adding the comment to a meme titled ' , meme.title)

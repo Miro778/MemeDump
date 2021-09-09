@@ -50,6 +50,7 @@ const addComment = async (meme, comment) => {
   const config = {
     headers: { Authorization: token },
   }
+  console.log(`data of the http post-request: ${comment}`)
   const response = await axios.post(`${baseUrl}/${meme.id}/comments`, comment, config)
   return response.data
 }

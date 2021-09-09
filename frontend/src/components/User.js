@@ -32,7 +32,7 @@ const User = ({ users }) => {
 
   return (
     <div>
-      <Avatar alt={user.username} src={user.avatar} />
+      <Avatar src={user.avatar} />
       <h1>{user.username}</h1>
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>

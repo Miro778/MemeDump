@@ -24,6 +24,12 @@ usersRouter.post('/', async (request, response) => {
       error: 'Password missing' }
     )}
 
+  if (!(body.avatar)) {
+      console.log('avatar missing')
+      return response.status(400).json({
+        error: 'Avatar missing' }
+     )}
+
   var today = new Date(),
   date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
@@ -41,7 +47,7 @@ usersRouter.post('/', async (request, response) => {
   const user = new User({
     username: body.username,
     joined: date,
-    avatar: 'https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?b=1&k=20&m=1300845620&s=612x612&w=0&h=AGv0X8A5n8D_2iETctrUbpJqonP-Mvb3RrWkWJqKZfE=',
+    avatar: body.avatar,
     passwordHash,
   })
 

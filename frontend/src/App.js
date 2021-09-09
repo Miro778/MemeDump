@@ -151,7 +151,7 @@ const App = () => {
     memeService
       .create(memeObject)
       .then(returnedMeme => {
-        dispatch(createMeme(memeObject))
+        // dispatch(createMeme(memeObject))
         console.log(`A new meme '${newTitle}' being added`)
         dispatch(setNotification(`A new meme '${newTitle}' added`,5))
         setNewTitle('')
