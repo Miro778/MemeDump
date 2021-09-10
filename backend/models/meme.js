@@ -12,10 +12,9 @@ const memeSchema = mongoose.Schema({
     comments: [
       {
         content: String,
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'User'
-        }
+        user: String,
+        date: String,
+        avatar: String
       }
     ],
   })

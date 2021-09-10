@@ -18,6 +18,8 @@ const User = ({ memes }) => {
 
   const [newComment, setNewComment] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
+  const logged = useSelector(state => state.loggedIn)
+  const username = logged.username
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,12 +31,13 @@ const User = ({ memes }) => {
     },
   }));
 
-    const classes = useStyles();
+  const classes = useStyles();
 
   const dispatch = useDispatch()
   const id = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1)
   console.log('finding by id: ' , id)
   let meme = memes[0]
+  let likedUsers = []
 
   console.log('finding from memes: ' , memes)
 
@@ -74,24 +77,49 @@ const User = ({ memes }) => {
           setErrorMessage(null)
         }, 3000)
       })
+      window.location.reload()
+  }
+
+  const Likes = (props) => {
+    let hasLiked = false
+
+    console.log('Liked users: ' , props.likedUsers)
+    console.log('Logged username: ' , props.username)
+
+    for (var i = 0;i < props.likedUsers.length;i++)
+    {
+      if (props.username === likedUsers[i].username) {
+        hasLiked = true
+        break
+      }
+    }
+    
+    if (!hasLiked) return (
+      <p>{meme.likes} likes <Button variant="contained" color="primary" onClick={() => {
+        dispatch(addVote(meme.id,meme))
+        props.likedUsers.push(props.username)
+        window.location.reload()
+      }}>like</Button></p>
+    )
+
+    return (
+      <p>{meme.likes} likes</p>
+    )
   }
 
   return (
     <div>
       <h1>{meme.title}</h1>
       <img src={meme.media}/>
-      <p>{meme.likes} likes <button onClick={() => {
-        dispatch(addVote(meme.id,meme))
-        window.location.reload()
-      }}>like</button></p>
+      <Likes likedUsers={likedUsers} username={username}/>
       <p>added by {meme.user.username}</p>
       <h2>Comments</h2>
       <List className={classes.root}>
       {comments.map(comment =>
       <ListItem alignItems="flex-start">
 
-      <div><ListItemAvatar>
-          <Avatar src={comment.user.avatar} />
+      <ListItemAvatar>
+          <Avatar src={comment.avatar} />
         </ListItemAvatar>
                 <ListItemText
                 primary={comment.content}
@@ -102,12 +130,13 @@ const User = ({ memes }) => {
                       className={classes.inline}
                       color="textPrimary"
                     >
-                      {comment.user.username}
+                    {comment.user} , {comment.date}
                     </Typography>
                 }
               />
-              </div>
+              <Divider variant="inset" component="li" />
               </ListItem>
+              
       )}
 
     </List>
