@@ -17,3 +17,4 @@ todo
 | 7.9  |  2   | Päivitetty material-ui:lla käyttöliittymästä seuraavia asioita: Teema, uuden postauksen lisäyssivu, postauksen like-painike |
 | 8.9  |  2   | Tehty yksittäisille meemeille oma sivu. |
 | 9.9  |  4   | Toteutettu kommenttikenttää meemeille. Ei vielä täysin toimiva. Lisäksi selvitetty ja korjattu bugeja. |
+| 10.9 |  2   | Korjattu kommenttikentän aiheuttama error ja viimeistelty kommenttien ulkoasu. |
