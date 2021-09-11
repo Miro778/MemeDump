@@ -58,7 +58,7 @@ const Menu = (props) => {
         <Button color="inherit" component={Link} to="/users">
           Users
         </Button>
-        <Button color="inherit" component={Link} to={`/profile/${thisUser.id}`}>
+        <Button color="inherit" component={Link} to={`/users/${thisUser.id}`}>
           My profile
         </Button>
         <Button color="inherit" onClick={props.handleLogout}>Logout </Button>
@@ -310,8 +310,8 @@ const App = () => {
 
   <Route path="/newpost"><NewPost></NewPost></Route>
   
-  <Route path="/profile/:id">
-            <User users={users} />
+  <Route path="/users/:id">
+            <User users={users} memes={memes}/>
   </Route>
 
   <Route path="/users">
@@ -321,7 +321,7 @@ const App = () => {
                   {users.map(user =>
                     <TableRow key={user.id}>
                       <TableCell>
-                        <p><Avatar alt={user.username} src={user.avatar} /><Link to={`../profile/${user.id}`}>{user.username}</Link></p>
+                        <p><Avatar alt={user.username} src={user.avatar} /><Link to={`../users/${user.id}`}>{user.username}</Link></p>
                       </TableCell>
                       <TableCell>posts: {user.memes.length}</TableCell>
                       <TableCell>joined in {user.joined}</TableCell>

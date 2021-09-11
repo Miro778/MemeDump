@@ -14,7 +14,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
-const User = ({ memes }) => {
+const MemeInfo = ({ memes }) => {
 
   const [newComment, setNewComment] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
@@ -159,4 +159,4 @@ const User = ({ memes }) => {
 }
 
 
-export default User
+export default MemeInfo

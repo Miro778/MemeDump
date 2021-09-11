@@ -6,7 +6,19 @@ const User = require('../models/user')
   const users = await User
   .find({}).populate('memes',{ url: 1, title: 1,author:1 })
     response.json(users.map(u => u.toJSON()))
-  }) 
+  })
+  
+ usersRouter.get('/:id', (request, response, next) => {
+    User.findById(request.params.id)
+      .then(user => {
+        if (user) {
+          response.json(user.toJSON())
+        } else {
+          response.status(404).end()
+        }
+      })
+      .catch(error => next(error))
+  })
   
 usersRouter.post('/', async (request, response) => {
   const body = request.body
@@ -54,6 +66,20 @@ usersRouter.post('/', async (request, response) => {
   const savedUser = await user.save()
 
   response.json(savedUser)
+})
+
+usersRouter.put('/:id', async (request, response, next) => {
+  const body = request.body
+
+  const user = {
+    username: body.username,
+    avatar: body.avatar,
+  }
+
+  console.log('NewUser: ' , user)
+
+  const newUser = await User.findByIdAndUpdate(request.params.id, user, { new: true })
+  response.json(newUser.toJSON())
 })
 
 module.exports = usersRouter

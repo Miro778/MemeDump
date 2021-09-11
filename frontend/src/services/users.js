@@ -6,4 +6,14 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-export default { getAll }
+const updateAvatar = (user, newAvatar) => {
+
+  const updatedUser = {
+    ...user,
+    avatar: newAvatar
+  }
+  const request = axios.put(`http://localhost:3003/api/users/${user.id}`, updatedUser)
+  return request.then(response => response.data)
+}
+
+export default { getAll, updateAvatar}
