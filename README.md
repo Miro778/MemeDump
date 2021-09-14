@@ -19,3 +19,4 @@ todo
 | 9.9  |  4   | Toteutettu kommenttikenttää meemeille. Ei vielä täysin toimiva. Lisäksi selvitetty ja korjattu bugeja. |
 | 10.9 |  2   | Korjattu kommenttikentän aiheuttama error ja viimeistelty kommenttien ulkoasu. |
 | 11.9 |  5   | Muutettu backendiä siten että käyttäjien tietoja voidaan muuttaa. Lisätty käyttöliittymästä mahdollisuus päivittää avatar ollessa omalla profiilisivulla. Selvitetty ja korjattu bugia, joka aiheutti errorin päivittäessä profiilisivua. |
+| 14.9 |  2   | Kirjautumissivulla nyt register-nappi jota kautta voi luoda uuden käyttäjän.
