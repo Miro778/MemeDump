@@ -16,4 +16,9 @@ const updateAvatar = (user, newAvatar) => {
   return request.then(response => response.data)
 }
 
-export default { getAll, updateAvatar}
+const newUser = (user) => {
+  const request = axios.post(`http://localhost:3003/api/users`, user)
+  return request.then(response => response.data)
+}
+
+export default { getAll, updateAvatar, newUser}

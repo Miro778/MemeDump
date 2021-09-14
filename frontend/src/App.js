@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Meme from './components/Meme'
 import MemeInfo from './components/MemeInfo'
 import memeService from './services/memes'
+import userService from './services/users'
 import loginService from './services/login'
 import './index.css'
 import PropTypes from 'prop-types'
@@ -22,6 +23,18 @@ import ChatIcon from '@material-ui/icons/Chat';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { Alert } from '@material-ui/lab'
 import { green, orange, purple } from '@material-ui/core/colors';
+import Modal from '@material-ui/core/Modal';
+
+const modalStyles = makeStyles((theme) => ({
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 const Menu = (props) => {
   const logged = useSelector(state => state.loggedIn)
@@ -242,6 +255,101 @@ const App = () => {
 
   const classes = useStyles();
 
+    // =================================  Modal Build =================================
+
+    function RegisterModal() {
+
+      function getModalStyle() {
+        const top = 50;
+        const left = 50;
+      
+        return {
+          top: `${top}%`,
+          left: `${left}%`,
+          transform: `translate(-${top}%, -${left}%)`,
+        };
+      }
+    
+      const classesModal = modalStyles();
+      const [modalStyle] = React.useState(getModalStyle);
+      const [open, setOpen] = React.useState(false);
+      const [newUsername, setNewUsername] = useState('');
+      const [newPassword, setNewPassword] = useState('');
+    
+      const handleOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
+    
+      const registerUser = async (event) => {
+        event.preventDefault()
+
+        let registeringUser = {
+          username: newUsername,
+          password: newPassword,
+          avatar: 'https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?b=1&k=20&m=1223671392&s=612x612&w=0&h=NlD1eNScGYsHBFjAzWrR0JzwkTOvtddTsq-9v5-LryQ='
+        }
+      
+        userService
+        .newUser(registeringUser)
+        .then(returnedUser => {
+          setUsername('')
+          setPassword('')
+          dispatch(setNotification(`Succesfully registered with username: '${user.username}'`,5))
+        })
+        .catch(() => {
+          console.log(
+            'An error occurred'
+          )
+        })
+        window.location.reload()
+      }
+      return (
+          <div>
+          <Button color="primary" variant="contained" onClick={handleOpen}>Register</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+                <div style={modalStyle} className={classesModal.paper}>
+                <form onSubmit={registerUser}>
+          <h2 id="simple-modal-title">Set a username and password for your user</h2>
+          <div>
+          <TextField label="Username"
+                  id='usernameField'
+                  type="text"
+                  value={newUsername}
+                  name="Title"
+                  onChange={({ target }) => setNewUsername(target.value)}
+                />
+          </div>
+          <div>
+          <TextField label="Password"
+                  id='passwordField'
+                  type="text"
+                  value={newPassword}
+                  name="Title"
+                  onChange={({ target }) => setNewPassword(target.value)}
+                />
+          </div>
+          <div>
+          <Button variant="contained" color="primary" id='submitUser-button' type="submit">Submit</Button>
+          <Button variant="contained" color="primary" id='submitUser-button' onClick={handleClose}>Close</Button>
+          </div>
+          </form>
+        </div>
+          </Modal>
+        </div> 
+      );
+      }
+    
+      // =================================================================================================
+
   if (user === null) {
     return (
       <div>
@@ -267,8 +375,9 @@ const App = () => {
               onChange={({ target }) => setPassword(target.value)}
             />
           </div>
-          <Button variant="contained" color="primary" id='login-button' type="submit">login</Button>
-        </form>
+          <Button variant="contained" color="primary" id='login-button' type="submit">Login</Button>
+          </form>
+          <RegisterModal />
       </div>
     )
   }
