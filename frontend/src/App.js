@@ -255,6 +255,83 @@ const App = () => {
 
   const classes = useStyles();
 
+  const MemeList = (props) => {
+
+    return (
+      <ImageList rowHeight={180} className={classes.imageList}>
+      {props.sortedMemes.map(meme =>
+        <ImageListItem key={meme.id} cols={2} style={{ height: 'auto' }}>
+              <img src={meme.media} alt={meme.title} />
+              <ImageListItemBar
+                title={<span><Link to={`../memes/${meme.id}`}>{meme.title}</Link></span>}
+                subtitle={<span>by {meme.user.username} on {meme.date}</span>}
+                actionIcon={
+                  <IconButton aria-label={`Like`} className={classes.icon}>
+                    <ThumbUpIcon />
+                    <span> {meme.likes} likes </span>
+                  </IconButton> 
+                }
+              />
+        </ImageListItem>
+      
+      )}
+      </ImageList>
+    )
+  }
+
+    const Sort = () => {
+
+      let sortedMemes = memes
+
+      function compareByLikes( a, b ) {
+        if ( a.likes > b.likes ){
+          return -1;
+        }
+        if ( a.likes < b.likes ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function compareByComments( a, b ) {
+        if ( a.comments.length > b.comments.length ){
+          return -1;
+        }
+        if ( a.comments.length < b.comments.length ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function sortChange() {
+        if (document.getElementById('box1')) {
+      console.log('sort option: ' , document.getElementById('box1').options[document.getElementById("box1").selectedIndex].value);
+      var selectedSortOption = document.getElementById('box1').options[document.getElementById("box1").selectedIndex].value
+      if (selectedSortOption === 'top rated') sortedMemes.sort( compareByLikes );
+      if (selectedSortOption === 'most comments') sortedMemes.sort( compareByComments );
+    }
+      }
+
+    sortChange()
+
+      return (
+
+        <body>
+        <form action="/action_page.php">
+  <label for="sort">Sort by:</label>
+  <select name="memes" id="box1" onChange={sortChange} >
+  <option value="None"> </option>
+    <option value="top rated">Top rated</option>
+    <option value="most recent">Most recent</option>
+    <option value="most comments">Most comments</option>
+  </select>
+  </form>
+      <MemeList sortedMemes={sortedMemes} />
+    </body>
+      )
+    }
+
+
     // =================================  Modal Build =================================
 
     function RegisterModal() {
@@ -292,19 +369,24 @@ const App = () => {
           password: newPassword,
           avatar: 'https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?b=1&k=20&m=1223671392&s=612x612&w=0&h=NlD1eNScGYsHBFjAzWrR0JzwkTOvtddTsq-9v5-LryQ='
         }
-      
+        
+        try {
         userService
         .newUser(registeringUser)
         .then(returnedUser => {
           setUsername('')
           setPassword('')
-          dispatch(setNotification(`Succesfully registered with username: '${user.username}'`,5))
+          dispatch(setNotification(`Succesfully registered a new user with username: '${user.username}'`,5))
         })
-        .catch(() => {
+          } catch(error) {
+          setErrorMessage('An error occured. Make sure that your username and password have at least 3 letters and that your username is unique.')
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 3000)
           console.log(
             'An error occurred'
           )
-        })
+        }
         window.location.reload()
       }
       return (
@@ -357,6 +439,7 @@ const App = () => {
 
         <form onSubmit={handleLogin}>
           <Error message={errorMessage} />
+          <Notification message={noteMessage} />
           <div>
             <TextField label="username"
               id='username'
@@ -397,24 +480,8 @@ const App = () => {
       <MemeInfo memes={memes} />
   </Route>
   <Route path="/memes">
-  <ImageList rowHeight={180} className={classes.imageList}>
-    {memes.map(meme =>
-      <ImageListItem key={meme.id} cols={2} style={{ height: 'auto' }}>
-            <img src={meme.media} alt={meme.title} />
-            <ImageListItemBar
-              title={<span><Link to={`../memes/${meme.id}`}>{meme.title}</Link></span>}
-              subtitle={<span>by {meme.user.username} on {meme.date}</span>}
-              actionIcon={
-                <IconButton aria-label={`Like`} className={classes.icon}>
-                  <ThumbUpIcon />
-                  <span> {meme.likes} likes </span>
-                </IconButton> 
-              }
-            />
-      </ImageListItem>
-    
-    )}
-    </ImageList>
+    <Sort />
+
   </Route>
 
   <Route path="/newpost"><NewPost></NewPost></Route>
