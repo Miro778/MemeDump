@@ -11,18 +11,18 @@ const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
 
 const mongoUrl = config.MONGODB_URI
-    logger.info('connecting to ' , mongoUrl)
+logger.info('connecting to ' , mongoUrl)
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => {
-  logger.info('connected to MongoDB')
-})
-.catch((error) => {
-  logger.error('error connection to MongoDB:', error.message)
-})
+  .then(() => {
+    logger.info('connected to MongoDB')
+  })
+  .catch((error) => {
+    logger.error('error connection to MongoDB:', error.message)
+  })
 
 app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>')
-  })
+  res.send('<h1>Hello World!</h1>')
+})
 
 app.use(cors())
 app.use(express.json())

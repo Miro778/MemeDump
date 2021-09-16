@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import memeService from '../services/memes'
 
 const memeReducer = (state = [], action) => {
@@ -17,9 +18,9 @@ const memeReducer = (state = [], action) => {
     return state.map(meme =>
       meme.id !== id ? meme : changedMeme
     )
-    case 'COMMENT':
-      console.log('action.data: ' , action.data)
-      return [...state, action.data]
+  case 'COMMENT':
+    console.log('action.data: ' , action.data)
+    return [...state, action.data]
   default:
     return state
   }
