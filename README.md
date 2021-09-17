@@ -22,3 +22,4 @@ todo
 | 14.9 |  2   | Kirjautumissivulla nyt register-nappi jota kautta voi luoda uuden käyttäjän.
 | 15.9 |  3   | Työstetty meemien lajittelupalkkia pääsivulle. Algoritmi saatu toimimaan.
 | 16.9 |  5   | Tehty erillinen sivu suosituimmille ja uusimmille meemeille. Asennettu Eslint ja siistitty sillä koodia. Refaktoroitu Frontendin koodia tekemällä Login-sivusta erillinen komponentti. Päivitetty Login-sivun ulkoasu.
+| 17.9 |  5   | Käyttöliittymää paranneltu. Lisätty users-sivu näyttämään käyttäjien postausten, kommenttien ja tykkäysten määrät, sekä näiden perusteella aktiivisuuspisteet |
