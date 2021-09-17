@@ -36,12 +36,10 @@ const remove = (id) => {
 }
 
 const vote = async (meme) => {
-  console.log('memeservice receives the post titled: ' , meme.title , 'And attempts to increase its votes by one.')
   const votedMeme = {
     ...meme,
     likes: meme.likes + 1
   }
-  console.log('Meme after the vote: ' , votedMeme)
   const response = await axios.put(`${baseUrl}/${meme.id}`, votedMeme)
   return response.data
 }
@@ -50,7 +48,6 @@ const addComment = async (meme, comment) => {
   const config = {
     headers: { Authorization: token },
   }
-  console.log(`data of the http post-request: ${comment}`)
   const response = await axios.post(`${baseUrl}/${meme.id}/comments`, comment, config)
   return response.data
 }

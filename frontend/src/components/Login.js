@@ -9,6 +9,7 @@ import Avatar from '@mui/material/Avatar'
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
+import '../index.css'
 
 const modalStyles = makeStyles((theme) => ({
   paper: {
@@ -134,12 +135,15 @@ const Login = (props) => {
     )
   }
 
+  document.body.style.backgroundColor = 'orange'
+
   return (
     <ThemeProvider theme={theme}>
-      <Container>
+      <Container >
         <CssBaseline />
         <Box
           sx={{
+            bgcolor: 'white',
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
@@ -149,7 +153,7 @@ const Login = (props) => {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <SentimentVerySatisfiedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography id="title" component="h1" variant="h5">
             MemeDump
           </Typography>
           <div>

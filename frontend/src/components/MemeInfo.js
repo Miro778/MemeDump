@@ -31,10 +31,7 @@ const MemeInfo = ({ memes }) => {
 
   const dispatch = useDispatch()
   const id = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1)
-  console.log('finding by id: ' , id)
   let meme = memes[0]
-
-  console.log('finding from memes: ' , memes)
 
   for (var i = 0;i < memes.length;i++)
   {
@@ -49,7 +46,6 @@ const MemeInfo = ({ memes }) => {
   }
 
   const comments = meme.comments
-  console.log('comments of this meme: ' , comments)
 
   const addComment = async (event) => {
     event.preventDefault()
@@ -60,7 +56,6 @@ const MemeInfo = ({ memes }) => {
     memeService
       .addComment(meme,commentObject)
       .then(returnedMeme => {
-        console.log(`A new comment '${commentObject.content}' being added`)
         setNewComment('')
       })
     window.location.reload()

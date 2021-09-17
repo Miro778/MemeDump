@@ -17,6 +17,17 @@ import { TableContainer, Table, TableCell, TableRow, TableBody, Paper, TextField
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import { Alert } from '@material-ui/lab'
 import { green, orange } from '@material-ui/core/colors'
+import Box from '@mui/material/Box'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import ExitToApp from '@material-ui/icons/ExitToApp'
+import StarsIcon from '@material-ui/icons/Stars'
+import WatchLaterIcon from '@material-ui/icons/WatchLater'
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos'
+import PeopleIcon from '@material-ui/icons/People'
+import ImageIcon from '@material-ui/icons/Image'
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
+import CommentIcon from '@material-ui/icons/Comment'
+import ControlPointIcon from '@material-ui/icons/ControlPoint'
 
 const Menu = (props) => {
   const logged = useSelector(state => state.loggedIn)
@@ -30,32 +41,34 @@ const Menu = (props) => {
   {
     if (username === users[i].username) {
       thisUser = users[i]
-      console.log(`Current user: ${thisUser.username}`)
       break
     }
   }
 
   return (
     <AppBar position="static">
-      <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu">
-        </IconButton>
-        <Button color="inherit" component={Link} to="/top">
-          Top
-        </Button>
-        <Button color="inherit" component={Link} to="/fresh">
-          Fresh
-        </Button>
-        <Button color="inherit" component={Link} to="/newpost">
-          New post
-        </Button>
-        <Button color="inherit" component={Link} to="/users">
-          Users
-        </Button>
-        <Button color="inherit" component={Link} to={`/users/${thisUser.id}`}>
-          My profile
-        </Button>
-        <Button color="inherit" onClick={props.handleLogout}>Logout </Button>
+      <Toolbar style={{ display:'flex', justifyContent:'space-between' }}>
+        <div></div>
+        <div >
+          <Button style={{ marginRight: 40, marginLeft: 100 }} variant="contained" color="inherit" component={Link} to="/top">
+            <b>Top</b><StarsIcon style={{ marginLeft: 10 }}/>
+          </Button>
+          <Button style={{ marginRight: 40 }} variant="contained" color="inherit" component={Link} to="/fresh">
+            <b>Fresh</b><WatchLaterIcon style={{ marginLeft: 10 }}/>
+          </Button>
+          <Button style={{ marginRight: 40 }} variant="contained" color="inherit" component={Link} to="/newpost">
+            <b>New post</b><AddToPhotosIcon style={{ marginLeft: 10 }}/>
+          </Button>
+          <Button variant="contained" color="inherit" component={Link} to="/users">
+            <b>Users</b><PeopleIcon style={{ marginLeft: 10 }}/>
+          </Button>
+        </div>
+        <div>
+          <Button color="inherit" component={Link} to={`/users/${thisUser.id}`}>
+          My profile <AccountCircleIcon style={{ marginLeft: 10 }}/>
+          </Button>
+          <Button color="inherit" sx={{ display: { xs: 'none', md: 'flex' } }} onClick={props.handleLogout}>Logout <ExitToApp style={{ marginLeft: 10 }}/></Button>
+        </div>
       </Toolbar>
     </AppBar>
   )
@@ -127,8 +140,6 @@ const App = () => {
   }
 
   const handleLogout = async () => {
-    console.log('logging out')
-
     window.localStorage.removeItem('loggedMemeAppUser')
     dispatch(logOut())
     window.location.reload()
@@ -145,8 +156,6 @@ const App = () => {
     memeService
       .create(memeObject)
       .then(returnedMeme => {
-        // dispatch(createMeme(memeObject))
-        console.log(`A new meme '${newTitle}' being added`)
         dispatch(setNotification(`A new meme '${newTitle}' added`,5))
         setNewTitle('')
       })
@@ -215,8 +224,8 @@ const App = () => {
       backgroundColor: theme.palette.background.paper,
     },
     imageList: {
-      width: 800,
-      height: 720,
+      width: 600,
+      height: 900,
     },
     icon: {
       color: 'rgba(255, 255, 255, 0.54)',
@@ -224,6 +233,28 @@ const App = () => {
   }))
 
   const classes = useStyles()
+
+  function getLikes( user ) {
+
+    var likes = 0
+
+    for (var i = 0; i < memes.length; i++) {
+      if (memes[i].user.id === user.id) likes = likes + memes[i].likes
+    }
+    return likes
+  }
+
+  function getComments( user ) {
+
+    var comments = 0
+
+    for (var i = 0; i < memes.length; i++) {
+      for (var j = 0; j < memes[i].comments.length; j++) {
+        if (memes[i].comments[j].user === user.username) comments++
+      }
+    }
+    return comments
+  }
 
   function compareByLikes( a, b ) {
     if ( a.likes > b.likes ){
@@ -260,7 +291,7 @@ const App = () => {
     memes.sort( compareByLikes )
 
     return (
-      <ImageList rowHeight={180} className={classes.imageList}>
+      <ImageList className={classes.imageList}>
         {memes.map(meme =>
           <ImageListItem key={meme.id} cols={2} style={{ height: 'auto' }}>
             <img src={meme.media} alt={meme.title} />
@@ -268,7 +299,7 @@ const App = () => {
               title={<span><Link to={`../memes/${meme.id}`}>{meme.title}</Link></span>}
               subtitle={<span>by {meme.user.username} on {meme.date}</span>}
               actionIcon={
-                <IconButton aria-label={'Like'} className={classes.icon}>
+                <IconButton aria-label={'Like'} href={`../memes/${meme.id}`} className={classes.icon}>
                   <ThumbUpIcon />
                   <span> {meme.likes} likes </span>
                 </IconButton>
@@ -316,46 +347,57 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Container>
         <Router>
-
-          <h1>MemeDump</h1>
+          <div id='title'>
+            <h1>MemeDump</h1>
+          </div>
 
           <Notification message={noteMessage} />
 
-          <Menu handleLogout={handleLogout} />
-          <Switch>
-            <Route path="/memes/:id">
-              <MemeInfo memes={memes} />
-            </Route>
-            <Route path="/top">
-              <TopRatedMemeList />
-            </Route>
-            <Route path="/fresh">
-              <MostRecentMemeList />
-            </Route>
-            <Route path="/newpost"><NewPost></NewPost></Route>
+          <Box sx={{
+            bgcolor: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+            <Menu handleLogout={handleLogout} />
+            <Switch>
+              <Route path="/memes/:id">
+                <MemeInfo memes={memes} />
+              </Route>
+              <Route path="/top">
+                <TopRatedMemeList />
+              </Route>
+              <Route path="/fresh">
+                <MostRecentMemeList />
+              </Route>
+              <Route path="/newpost"><NewPost></NewPost></Route>
 
-            <Route path="/users/:id">
-              <User users={users} memes={memes}/>
-            </Route>
+              <Route path="/users/:id">
+                <User users={users} memes={memes}/>
+              </Route>
 
-            <Route path="/users">
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableBody>
-                    {users.map(user =>
-                      <TableRow key={user.id}>
-                        <TableCell>
-                          <p><Avatar alt={user.username} src={user.avatar} /><Link to={`../users/${user.id}`}>{user.username}</Link></p>
-                        </TableCell>
-                        <TableCell>posts: {user.memes.length}</TableCell>
-                        <TableCell>joined in {user.joined}</TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Route>
-          </Switch>
+              <Route path="/users">
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableBody>
+                      {users.map(user =>
+                        <TableRow key={user.id}>
+                          <TableCell>
+                            <p><Avatar alt={user.username} src={user.avatar} /><Link to={`../users/${user.id}`}>{user.username}</Link></p>
+                          </TableCell>
+                          <TableCell><ControlPointIcon />Activity points: {Math.abs(user.memes.length * 3) + getLikes(user) + getComments(user)}</TableCell>
+                          <TableCell><ImageIcon />posts: {user.memes.length}</TableCell>
+                          <TableCell><ThumbUpIcon />likes received: {getLikes(user)}</TableCell>
+                          <TableCell><CommentIcon />comments posted: {getComments(user)}</TableCell>
+                          <TableCell><CalendarTodayIcon /> joined in {user.joined}</TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Route>
+            </Switch>
+          </Box>
         </Router>
       </Container>
     </ThemeProvider>

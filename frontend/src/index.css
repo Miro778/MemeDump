@@ -32,3 +32,9 @@ code {
   padding: 10px;
   margin-bottom: 10px;
 }
+
+#title {
+  text-align: center;
+  font-family: cursive;
+  font-size: 30px;
+}

@@ -22,8 +22,6 @@ const User = ({ users, memes }) => {
 
   const logged = useSelector(state => state.loggedIn)
 
-  console.log('logged: ' , logged.username)
-
   if (users.length < 1) {
     return null
   }
@@ -40,9 +38,6 @@ const User = ({ users, memes }) => {
       break
     }
   }
-
-  console.log('users: ' , users)
-  console.log('Viewing profile of: ' , user)
 
   for (var j = 0;j < memes.length;j++)
   {
