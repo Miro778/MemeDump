@@ -87,6 +87,7 @@ const App = () => {
   const noteMessage = useSelector(state => state.notification)
   const users = useSelector(state => state.users)
   const memes = useSelector(state => state.memes)
+  users.sort( compareByPoints )
 
 
   useEffect(() => {
@@ -261,6 +262,16 @@ const App = () => {
       return -1
     }
     if ( a.likes < b.likes ){
+      return 1
+    }
+    return 0
+  }
+
+  function compareByPoints( a, b ) {
+    if ( Math.abs(a.memes.length * 3) + getLikes(a) + getComments(a) > Math.abs(b.memes.length * 3) + getLikes(b) + getComments(b) ){
+      return -1
+    }
+    if ( Math.abs(a.memes.length * 3) + getLikes(a) + getComments(a) < Math.abs(b.memes.length * 3) + getLikes(b) + getComments(b) ){
       return 1
     }
     return 0
