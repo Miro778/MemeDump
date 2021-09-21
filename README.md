@@ -24,3 +24,4 @@ todo
 | 16.9 |  5   | Tehty erillinen sivu suosituimmille ja uusimmille meemeille. Asennettu Eslint ja siistitty sillä koodia. Refaktoroitu Frontendin koodia tekemällä Login-sivusta erillinen komponentti. Päivitetty Login-sivun ulkoasu.
 | 17.9 |  5   | Käyttöliittymää paranneltu. Lisätty users-sivu näyttämään käyttäjien postausten, kommenttien ja tykkäysten määrät, sekä näiden perusteella aktiivisuuspisteet |
 | 20.9 |  1   | Toteutettu algoritmi, joka lajittelee käyttäjien listan sen mukaan kenellä on eniten activity pointseja. Tämän mukana käyttäjät lajitellaan users-sivulla. Lisätty dataa (enemmän postauksia ja kommentteja)
+| 21.9 |  3   | Profiilisivu näyttää nyt aktiivisuuspisteet, ja niihin perustuvan rankin. Lisätty infosivu, joka sisältää käyttöohjeet ja tietoa sovelluksesta.
