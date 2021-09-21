@@ -46,6 +46,36 @@ const User = ({ users, memes }) => {
     }
   }
 
+  function getLikes( user ) {
+
+    var likes = 0
+
+    for (var i = 0; i < memes.length; i++) {
+      if (memes[i].user.id === user.id) likes = likes + memes[i].likes
+    }
+    return likes
+  }
+
+  function getComments( user ) {
+
+    var comments = 0
+
+    for (var i = 0; i < memes.length; i++) {
+      for (var j = 0; j < memes[i].comments.length; j++) {
+        if (memes[i].comments[j].user === user.username) comments++
+      }
+    }
+    return comments
+  }
+
+  function getRank( user ) {
+
+    for (var i = 0; i < users.length; i++) {
+      if (users[i] === user) return i+1
+    }
+    return users.length-1
+  }
+
   // =================================  Modal Build =================================
 
   function SimpleModal() {
@@ -128,6 +158,7 @@ const User = ({ users, memes }) => {
       </div>
       <SimpleModal />
       <h1>{user.username}</h1>
+      <p>Activity points: {Math.abs(user.memes.length * 3) + getLikes(user) + getComments(user)}, <b>Rank: #{getRank(user)}</b></p>
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
@@ -140,6 +171,7 @@ const User = ({ users, memes }) => {
     <div>
       <img alt="null" src={user.avatar} width="300" height="300"/>
       <h1>{user.username}</h1>
+      <p>Activity points: {Math.abs(user.memes.length * 3) + getLikes(user) + getComments(user)}, <b>Rank: #{getRank(user)}</b></p>
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>
       {theseMemes.map(meme =>

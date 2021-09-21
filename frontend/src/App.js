@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import MemeInfo from './components/MemeInfo'
+import Info from './components/Info'
 import Login from './components/Login'
 import memeService from './services/memes'
 import loginService from './services/login'
@@ -28,6 +29,7 @@ import ImageIcon from '@material-ui/icons/Image'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import CommentIcon from '@material-ui/icons/Comment'
 import ControlPointIcon from '@material-ui/icons/ControlPoint'
+import InfoIcon from '@material-ui/icons/Info'
 
 const Menu = (props) => {
   const logged = useSelector(state => state.loggedIn)
@@ -59,8 +61,11 @@ const Menu = (props) => {
           <Button style={{ marginRight: 40 }} variant="contained" color="inherit" component={Link} to="/newpost">
             <b>New post</b><AddToPhotosIcon style={{ marginLeft: 10 }}/>
           </Button>
-          <Button variant="contained" color="inherit" component={Link} to="/users">
+          <Button style={{ marginRight: 40 }} variant="contained" color="inherit" component={Link} to="/users">
             <b>Users</b><PeopleIcon style={{ marginLeft: 10 }}/>
+          </Button>
+          <Button variant="contained" color="inherit" component={Link} to="/info">
+            <b>Info</b><InfoIcon style={{ marginLeft: 10 }}/>
           </Button>
         </div>
         <div>
@@ -361,6 +366,9 @@ const App = () => {
           <div id='title'>
             <h1>MemeDump</h1>
           </div>
+          <div id='loggedInfo' >
+            <p>Logged in as: {user.username}</p>
+          </div>
 
           <Notification message={noteMessage} />
 
@@ -380,6 +388,9 @@ const App = () => {
               </Route>
               <Route path="/fresh">
                 <MostRecentMemeList />
+              </Route>
+              <Route path="/info">
+                <Info />
               </Route>
               <Route path="/newpost"><NewPost></NewPost></Route>
 

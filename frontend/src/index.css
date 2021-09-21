@@ -38,3 +38,12 @@ code {
   font-family: cursive;
   font-size: 30px;
 }
+
+#loggedInfo {
+  text-align: center;
+}
+
+#infoBar {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
