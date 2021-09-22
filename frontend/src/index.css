@@ -47,3 +47,8 @@ code {
   margin-top: 50px;
   margin-bottom: 50px;
 }
+
+#searchBar {
+  align-items: flex-start;
+  margin: 20px;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { useParams,Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -95,6 +96,7 @@ const User = ({ users, memes }) => {
     const [modalStyle] = React.useState(getModalStyle)
     const [open, setOpen] = React.useState(false)
     const [newAvatar, setNewAvatar] = useState('')
+    const [file, setFile] = useState()
 
     const handleOpen = () => {
       setOpen(true)
@@ -143,6 +145,24 @@ const User = ({ users, memes }) => {
                 <Button variant="contained" color="primary" id='submitAvatar-button' type="submit">Submit</Button>
               </div>
             </form>
+            <h2 id="simple-modal-title">..Or upload a jpg file</h2>
+            <form action="#">
+              <div className="flex">
+                <label htmlFor="file">File</label>
+                <input
+                  type="file"
+                  id="file"
+                  accept=".jpg"
+                  onChange={event => {
+                    const file = event.target.files[0]
+                    setFile(file)
+                  }}
+                />
+              </div>
+            </form>
+            <div>
+              <Button variant="contained" color="primary" id='submitAvatar-button' type="submit">Submit</Button>
+            </div>
           </div>
         </Modal>
       </div>

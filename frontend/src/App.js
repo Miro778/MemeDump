@@ -29,6 +29,8 @@ import ImageIcon from '@material-ui/icons/Image'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import CommentIcon from '@material-ui/icons/Comment'
 import ControlPointIcon from '@material-ui/icons/ControlPoint'
+import SearchIcon from '@material-ui/icons/Search'
+import ClearIcon from '@material-ui/icons/Clear'
 import InfoIcon from '@material-ui/icons/Info'
 
 const Menu = (props) => {
@@ -52,19 +54,19 @@ const Menu = (props) => {
       <Toolbar style={{ display:'flex', justifyContent:'space-between' }}>
         <div></div>
         <div >
-          <Button style={{ marginRight: 40, marginLeft: 100 }} variant="contained" color="inherit" component={Link} to="/top">
+          <Button style={{ marginRight: 20, marginLeft: 100 }} variant="contained" color="inherit" component={Link} to="/top">
             <b>Top</b><StarsIcon style={{ marginLeft: 10 }}/>
           </Button>
-          <Button style={{ marginRight: 40 }} variant="contained" color="inherit" component={Link} to="/fresh">
+          <Button style={{ margin: 20 }} variant="contained" color="inherit" component={Link} to="/fresh">
             <b>Fresh</b><WatchLaterIcon style={{ marginLeft: 10 }}/>
           </Button>
-          <Button style={{ marginRight: 40 }} variant="contained" color="inherit" component={Link} to="/newpost">
+          <Button style={{ margin: 20 }} variant="contained" color="inherit" component={Link} to="/newpost">
             <b>New post</b><AddToPhotosIcon style={{ marginLeft: 10 }}/>
           </Button>
-          <Button style={{ marginRight: 40 }} variant="contained" color="inherit" component={Link} to="/users">
+          <Button style={{ margin: 20 }} variant="contained" color="inherit" component={Link} to="/users">
             <b>Users</b><PeopleIcon style={{ marginLeft: 10 }}/>
           </Button>
-          <Button variant="contained" color="inherit" component={Link} to="/info">
+          <Button style={{ margin: 20 }} variant="contained" color="inherit" component={Link} to="/info">
             <b>Info</b><InfoIcon style={{ marginLeft: 10 }}/>
           </Button>
         </div>
@@ -85,6 +87,7 @@ const App = () => {
   const [newMedia, setNewMedia] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [ filter, setFilter] = useState('')
   const [user, setUser] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -239,6 +242,43 @@ const App = () => {
   }))
 
   const classes = useStyles()
+
+  const handleFilter = (event) => {
+    setFilter(event.target.value)
+    console.log('Filter: ' , filter)
+  }
+
+  const clearSearch = () => {
+    setFilter('')
+    console.log('Filter: ' , filter)
+  }
+
+  function QuickSearchToolbar() {
+    return (
+      <div className={classes.root}>
+        <TextField
+          variant="standard"
+          value={filter}
+          onChange={handleFilter}
+          placeholder="Search…"
+          className={classes.textField}
+          InputProps={{
+            startAdornment: <SearchIcon fontSize="small" />,
+            endAdornment: (
+              <IconButton
+                title="Clear"
+                aria-label="Clear"
+                size="small"
+                onClick={clearSearch}
+              >
+                <ClearIcon fontSize="small" />
+              </IconButton>
+            ),
+          }}
+        />
+      </div>
+    )
+  }
 
   function getLikes( user ) {
 
@@ -399,21 +439,28 @@ const App = () => {
               </Route>
 
               <Route path="/users">
+                <div id='searchBar'>
+                  <QuickSearchToolbar />
+                </div>
                 <TableContainer component={Paper}>
                   <Table>
                     <TableBody>
-                      {users.map(user =>
-                        <TableRow key={user.id}>
-                          <TableCell>
-                            <p><Avatar alt={user.username} src={user.avatar} /><Link to={`../users/${user.id}`}>{user.username}</Link></p>
-                          </TableCell>
-                          <TableCell><ControlPointIcon />Activity points: {Math.abs(user.memes.length * 3) + getLikes(user) + getComments(user)}</TableCell>
-                          <TableCell><ImageIcon />posts: {user.memes.length}</TableCell>
-                          <TableCell><ThumbUpIcon />likes received: {getLikes(user)}</TableCell>
-                          <TableCell><CommentIcon />comments posted: {getComments(user)}</TableCell>
-                          <TableCell><CalendarTodayIcon /> joined in {user.joined}</TableCell>
-                        </TableRow>
-                      )}
+                      {users.map(user => (
+                        user.username.includes(filter)
+                          ? (
+                            <TableRow key={user.id}>
+                              <TableCell>
+                                <p><Avatar alt={user.username} src={user.avatar} /><Link to={`../users/${user.id}`}>{user.username}</Link></p>
+                              </TableCell>
+                              <TableCell><ControlPointIcon />Activity points: {Math.abs(user.memes.length * 3) + getLikes(user) + getComments(user)}</TableCell>
+                              <TableCell><ImageIcon />posts: {user.memes.length}</TableCell>
+                              <TableCell><ThumbUpIcon />likes received: {getLikes(user)}</TableCell>
+                              <TableCell><CommentIcon />comments posted: {getComments(user)}</TableCell>
+                              <TableCell><CalendarTodayIcon /> joined in {user.joined}</TableCell>
+                            </TableRow>
+                          )
+                          : null
+                      ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
