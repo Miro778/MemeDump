@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams,Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Button from '@material-ui/core/Button'
@@ -97,6 +97,7 @@ const User = ({ users, memes }) => {
     const [open, setOpen] = React.useState(false)
     const [newAvatar, setNewAvatar] = useState('')
     const [file, setFile] = useState()
+    useEffect( () => { console.log(file) }, [file])
 
     const handleOpen = () => {
       setOpen(true)
@@ -106,7 +107,7 @@ const User = ({ users, memes }) => {
       setOpen(false)
     }
 
-    const replaceAvatar = async (event) => {
+    const setAvatarByURL = async (event) => {
       event.preventDefault()
 
       userService
@@ -120,6 +121,14 @@ const User = ({ users, memes }) => {
         })
       window.location.reload()
     }
+
+    const setAvatarByFile = async (event) => {
+      const data = new FormData()
+      data.append('name','name')
+      data.append('file', file)
+      userService.updateAvatarByFile(user, data)
+    }
+
     return (
       <div>
         <Button color="primary" variant="contained" onClick={handleOpen}>Change Avatar</Button>
@@ -130,7 +139,7 @@ const User = ({ users, memes }) => {
           aria-describedby="simple-modal-description"
         >
           <div style={modalStyle} className={classesModal.paper}>
-            <form onSubmit={replaceAvatar}>
+            <form onSubmit={setAvatarByURL}>
               <h2 id="simple-modal-title">Submit a new avatar with a link to the image's URL</h2>
               <div>
                 <TextField label="Avatar"
@@ -146,23 +155,21 @@ const User = ({ users, memes }) => {
               </div>
             </form>
             <h2 id="simple-modal-title">..Or upload a jpg file</h2>
-            <form action="#">
+            <form action="http://localhost:3003/api/upload" method="post" enctype="multipart/form-data">
               <div className="flex">
                 <label htmlFor="file">File</label>
                 <input
+                  name="avatar"
                   type="file"
                   id="file"
                   accept=".jpg"
-                  onChange={event => {
-                    const file = event.target.files[0]
-                    setFile(file)
-                  }}
+                  multiple
                 />
               </div>
+              <div>
+                <Button variant="contained" color="primary" id='submitAvatar-button' type="submit">Submit</Button>
+              </div>
             </form>
-            <div>
-              <Button variant="contained" color="primary" id='submitAvatar-button' type="submit">Submit</Button>
-            </div>
           </div>
         </Modal>
       </div>
