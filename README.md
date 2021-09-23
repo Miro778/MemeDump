@@ -26,4 +26,5 @@ todo
 | 20.9 |  1   | Toteutettu algoritmi, joka lajittelee käyttäjien listan sen mukaan kenellä on eniten activity pointseja. Tämän mukana käyttäjät lajitellaan users-sivulla. Lisätty dataa (enemmän postauksia ja kommentteja)
 | 21.9 |  3   | Profiilisivu näyttää nyt aktiivisuuspisteet, ja niihin perustuvan rankin. Lisätty infosivu, joka sisältää käyttöohjeet ja tietoa sovelluksesta.
 | 22.9 |  2   | Tehty hakupalkki users-sivulle. Satunnaisia käyttöliittymän parannuksia.
-
+| 23.9 |  3,5 | Työstetty mahdollisuutta päivittää avatar lataamalla tiedosto. 
+Tutustuttu Multerin dokumentaatioon tätä varten, ja yritetty toteuttaa se siten. Erittäin useiden virheilmoituksen jälkeen todettu kyseinen tapa liian monimutkaiseksi. Päädytty vaihtamaan toteutustapa HTML form -tapaan. Saatu muuten virheettömästi upload toimimaan, mutta tiedosto korruptoitui lähetyksen jälkeen. 
