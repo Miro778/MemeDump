@@ -27,4 +27,5 @@ todo
 | 21.9 |  3   | Profiilisivu näyttää nyt aktiivisuuspisteet, ja niihin perustuvan rankin. Lisätty infosivu, joka sisältää käyttöohjeet ja tietoa sovelluksesta.
 | 22.9 |  2   | Tehty hakupalkki users-sivulle. Satunnaisia käyttöliittymän parannuksia.
 | 23.9 |  3,5 | Työstetty mahdollisuutta päivittää avatar lataamalla tiedosto. Tutustuttu Multerin dokumentaatioon tätä varten, ja yritetty toteuttaa se siten. Erittäin useiden virheilmoituksen jälkeen todettu kyseinen tapa liian monimutkaiseksi. Päädytty vaihtamaan toteutustapa HTML form -tapaan. Saatu muuten virheettömästi upload toimimaan, mutta tiedosto korruptoitui lähetyksen jälkeen. 
-| 24.9 |  2   | Selvitetty ongelmaa, jonka vuoksi ladatut tiedostot korruptoituvat. Muutettu backendiä, ja saatu ongelma korjattua. 
+| 24.9 |  2   | Selvitetty ongelmaa, jonka vuoksi ladatut tiedostot korruptoituvat. Muutettu backendiä, ja saatu ongelma korjattua.
+| 27.9 |  2   | Tehty backend ticketille. Laitettu meemiin sivulle linkki tekijän profiiliin. Profiilisivu näyttää meemien listassa myös jokaisen meemin kuvan, tykkäysten ja kommenttien määrän.
