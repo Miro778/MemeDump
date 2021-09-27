@@ -1,5 +1,6 @@
 import { React, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { addVote } from '../reducers/memeReducer'
 import { TextField, Button } from '@material-ui/core'
 import memeService from '../services/memes'
@@ -69,7 +70,7 @@ const MemeInfo = ({ memes }) => {
         setDisable(true)
         dispatch(addVote(meme.id,meme))
       }}>like</Button></p>
-      <p>added by {meme.user.username}</p>
+      <p>added by  <Link to={`../users/${meme.user.id}`}>{meme.user.username}</Link></p>
       <h2>Comments</h2>
       <List className={classes.root}>
         {comments.map(comment =>

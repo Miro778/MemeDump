@@ -7,6 +7,9 @@ import Modal from '@material-ui/core/Modal'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import userService from '../services/users'
+import CommentIcon from '@material-ui/icons/Comment'
+import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import Divider from '@mui/material/Divider'
 
 const modalStyles = makeStyles((theme) => ({
   paper: {
@@ -189,7 +192,10 @@ const User = ({ users, memes }) => {
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
-        <p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
+        <><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
+          <img src={meme.media} width="180" height="180"></img>
+          <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
+          <Divider /></>
       )}
     </div>
   )
@@ -202,7 +208,10 @@ const User = ({ users, memes }) => {
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
-        <p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
+        <><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
+          <img src={meme.media} width="180" height="180"></img>
+          <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
+          <Divider /></>
       )}
     </div>
   )

@@ -380,7 +380,7 @@ const App = () => {
               title={<span><Link to={`../memes/${meme.id}`}>{meme.title}</Link></span>}
               subtitle={<span>by {meme.user.username} on {meme.date}</span>}
               actionIcon={
-                <IconButton aria-label={'Like'} className={classes.icon}>
+                <IconButton aria-label={'Like'} href={`../memes/${meme.id}`}className={classes.icon}>
                   <ThumbUpIcon />
                   <span> {meme.likes} likes </span>
                 </IconButton>
