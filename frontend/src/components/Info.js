@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import React, { useState } from 'react'
 import ControlPointIcon from '@material-ui/icons/ControlPoint'
 import CommentIcon from '@material-ui/icons/Comment'
 import ImageIcon from '@material-ui/icons/Image'
@@ -9,9 +10,46 @@ import AddToPhotosIcon from '@material-ui/icons/AddToPhotos'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ExitToApp from '@material-ui/icons/ExitToApp'
+import Button from '@material-ui/core/Button'
+import ticketService from '../services/tickets'
 import '../index.css'
 
 const Info = () => {
+
+  const [ticketType, setTicketType] = useState('suggestion')
+  const [ticketContent, setTicketContent] = useState('')
+
+  const sendTicket = async (event) => {
+
+    const ticketObject = {
+      content: ticketContent,
+      type: ticketType
+    }
+
+    console.log('ticketObject: ' , ticketObject)
+
+    ticketService
+      .postTicket(ticketObject)
+      .then(returnedTicket => {
+        setTicketType('')
+        setTicketContent('')
+        alert('Your ticket has been submitted.')
+      })
+
+  }
+
+  function setType()
+  {
+    var selectedValue = document.getElementById('types').value
+    setTicketType(selectedValue)
+  }
+
+  function setContent()
+  {
+    var selectedValue = document.getElementById('ticketContent').value
+    setTicketContent(selectedValue)
+  }
+
   return (
     <div>
       <div>
@@ -42,6 +80,28 @@ const Info = () => {
         <p><ImageIcon /> Posting a meme: <b>+3 points</b></p>
         <p><CommentIcon /> Posting a comment: <b>+1 points</b></p>
         <p><ThumbUpIcon /> Receiving a like from a meme: <b>+1 points</b></p>
+      </div>
+      <div id='infoBar'>
+        <h2>Send a ticket</h2>
+        <p>In a need to contact the administration? That can be done by sending a ticket here.<br />
+         Select a type from 'Suggestion', 'Bug Report' or 'Other issue' and write a description.</p>
+        <form onSubmit={sendTicket}>
+          <div style={{ marginBottom: 30, marginTop: 20 }}>
+            <label for="types">Choose a type for your ticket: </label>
+            <select name="types" id="types" onChange={setType}>
+              <option value="Suggestion">Suggestion</option>
+              <option value="Bug Report">Bug Report</option>
+              <option value="Other Issue">Other Issue</option>
+            </select>
+          </div>
+          <div>
+            <p>Describe your issue below: </p>
+            <textarea rows="4" cols="50" name="ticketContent" type="text" id="ticketContent" onChange={setContent}/>
+          </div>
+          <div>
+            <Button variant="contained" color="primary" id='submitTicket-button' type="submit">Submit</Button>
+          </div>
+        </form>
       </div>
     </div>
 

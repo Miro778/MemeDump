@@ -52,4 +52,14 @@ const addComment = async (meme, comment) => {
   return response.data
 }
 
-export default { getAll, create, update, setToken, remove, vote, addComment }
+const exportedObject = {
+  getAll,
+  create,
+  update,
+  setToken,
+  remove,
+  vote,
+  addComment
+}
+
+export default exportedObject

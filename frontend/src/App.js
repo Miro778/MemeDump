@@ -3,6 +3,7 @@ import MemeInfo from './components/MemeInfo'
 import Info from './components/Info'
 import Login from './components/Login'
 import memeService from './services/memes'
+import ticketService from './services/tickets'
 import loginService from './services/login'
 import './index.css'
 import { setNotification } from './reducers/notificationReducer'
@@ -54,25 +55,25 @@ const Menu = (props) => {
       <Toolbar style={{ display:'flex', justifyContent:'space-between' }}>
         <div></div>
         <div >
-          <Button style={{ marginRight: 20, marginLeft: 100 }} variant="contained" color="inherit" component={Link} to="/top">
+          <Button style={{ marginRight: 10, marginLeft: 100 }} variant="contained" color="inherit" component={Link} to="/top">
             <b>Top</b><StarsIcon style={{ marginLeft: 10 }}/>
           </Button>
-          <Button style={{ margin: 20 }} variant="contained" color="inherit" component={Link} to="/fresh">
+          <Button style={{ margin: 10 }} variant="contained" color="inherit" component={Link} to="/fresh">
             <b>Fresh</b><WatchLaterIcon style={{ marginLeft: 10 }}/>
           </Button>
-          <Button style={{ margin: 20 }} variant="contained" color="inherit" component={Link} to="/newpost">
+          <Button style={{ margin: 10 }} variant="contained" color="inherit" component={Link} to="/newpost">
             <b>New post</b><AddToPhotosIcon style={{ marginLeft: 10 }}/>
           </Button>
-          <Button style={{ margin: 20 }} variant="contained" color="inherit" component={Link} to="/users">
+          <Button style={{ margin: 10 }} variant="contained" color="inherit" component={Link} to="/users">
             <b>Users</b><PeopleIcon style={{ marginLeft: 10 }}/>
           </Button>
-          <Button style={{ margin: 20 }} variant="contained" color="inherit" component={Link} to="/info">
-            <b>Info</b><InfoIcon style={{ marginLeft: 10 }}/>
+          <Button style={{ margin: 10 }} variant="contained" color="inherit" component={Link} to={`/users/${thisUser.id}`}>
+            <b>My Profile</b><AccountCircleIcon style={{ marginLeft: 10 }}/>
           </Button>
         </div>
         <div>
-          <Button color="inherit" component={Link} to={`/users/${thisUser.id}`}>
-          My profile <AccountCircleIcon style={{ marginLeft: 10 }}/>
+          <Button color="inherit" component={Link} to="/info">
+          Info & Support <InfoIcon style={{ marginLeft: 10 }}/>
           </Button>
           <Button color="inherit" sx={{ display: { xs: 'none', md: 'flex' } }} onClick={props.handleLogout}>Logout <ExitToApp style={{ marginLeft: 10 }}/></Button>
         </div>
@@ -109,8 +110,9 @@ const App = () => {
       setUser(user)
       dispatch(logIn(user))
       memeService.setToken(user.token)
+      ticketService.setToken(user.token)
     }
-  }, [])
+  },[dispatch])
 
   const theme = createTheme({
     palette: {
@@ -159,7 +161,6 @@ const App = () => {
     const memeObject = {
       title: newTitle,
       media: newMedia,
-
     }
 
     memeService

@@ -38,4 +38,11 @@ const newUser = (user) => {
   return request.then(response => response.data)
 }
 
-export default { getAll, updateAvatar, updateAvatarByFile, newUser }
+const exportedObject = {
+  getAll,
+  updateAvatar,
+  updateAvatarByFile,
+  newUser
+}
+
+export default exportedObject

@@ -21,8 +21,9 @@ ticketRouter.get('/', async (request, response) => {
 
 ticketRouter.post('/', async (request, response) => {
   const ticket = new Ticket(request.body)
-
+  console.log('ticket: ' , ticket)
   const token = getTokenFrom(request)
+  console.log('Token from request: ', token)
   const decodedToken = jwt.verify(token, process.env.SECRET)
   if (!token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })

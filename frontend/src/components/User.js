@@ -193,7 +193,7 @@ const User = ({ users, memes }) => {
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
         <><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
-          <img src={meme.media} width="180" height="180"></img>
+          <img src={meme.media} alt="" width="180" height="180"></img>
           <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
           <Divider /></>
       )}
@@ -209,7 +209,7 @@ const User = ({ users, memes }) => {
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
         <><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
-          <img src={meme.media} width="180" height="180"></img>
+          <img src={meme.media} alt="" width="180" height="180"></img>
           <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
           <Divider /></>
       )}
