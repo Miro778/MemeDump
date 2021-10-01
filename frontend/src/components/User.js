@@ -7,9 +7,12 @@ import Modal from '@material-ui/core/Modal'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import userService from '../services/users'
+import memeService from '../services/memes'
 import CommentIcon from '@material-ui/icons/Comment'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import Divider from '@mui/material/Divider'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import IconButton from '@material-ui/core/IconButton'
 
 const modalStyles = makeStyles((theme) => ({
   paper: {
@@ -192,10 +195,13 @@ const User = ({ users, memes }) => {
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
-        <><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
-          <img src={meme.media} alt="" width="180" height="180"></img>
-          <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
-          <Divider /></>
+        <><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link>
+          <IconButton onClick={() => ConfirmMemeDelete(meme.id)} aria-label="delete" size="large">
+            <DeleteForeverIcon fontSize="inherit" />
+          </IconButton></p>
+        <img src={meme.media} alt="" width="180" height="180"></img>
+        <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
+        <Divider /></>
       )}
     </div>
   )
@@ -215,6 +221,18 @@ const User = ({ users, memes }) => {
       )}
     </div>
   )
+}
+
+function ConfirmMemeDelete(id)
+{
+  // eslint-disable-next-line no-restricted-globals
+  var confirmation = confirm('Are you sure you want to delete this post?')
+  if (confirmation) {
+    memeService.remove(id)
+    window.location.reload()
+    return true
+  } else
+    return false
 }
 
 
