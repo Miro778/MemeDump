@@ -30,3 +30,4 @@ todo
 | 24.9 |  2   | Selvitetty ongelmaa, jonka vuoksi ladatut tiedostot korruptoituvat. Muutettu backendiä, ja saatu ongelma korjattua.
 | 27.9 |  2   | Tehty backend ticketille. Laitettu meemiin sivulle linkki tekijän profiiliin. Profiilisivu näyttää meemien listassa myös jokaisen meemin kuvan, tykkäysten ja kommenttien määrän.
 | 28.9 |  3   | Tehty tickettien lähetys sovelluksesta mahdolliseksi. Korjattu varoituksia joita ilmeni koodissa.  Muutettu navigointipalkissa 'My Profile' tärkeäksi, ja laitettu 'Info & Support' vähemmän tärkeäksi.
+| 1.10 |  1   | Tehty mahdollisuus poistaa omia meemejä oman profiilisivun kautta.
