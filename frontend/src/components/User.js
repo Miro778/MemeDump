@@ -25,9 +25,9 @@ const modalStyles = makeStyles((theme) => ({
   },
 }))
 
-const User = ({ users, memes }) => {
+const User = ({ users, memes, logged }) => {
 
-  const logged = useSelector(state => state.loggedIn)
+  console.log('logged: ' , logged)
 
   if (users.length < 1) {
     return null
@@ -195,13 +195,13 @@ const User = ({ users, memes }) => {
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
-        <><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link>
-          <IconButton onClick={() => ConfirmMemeDelete(meme.id)} aria-label="delete" size="large">
+        <div key={meme.id}><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link>
+          <IconButton onClick={() => ConfirmMemeDelete(meme.id)} aria-label="delete" size="medium">
             <DeleteForeverIcon fontSize="inherit" />
           </IconButton></p>
         <img src={meme.media} alt="" width="180" height="180"></img>
         <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
-        <Divider /></>
+        <Divider /></div>
       )}
     </div>
   )
@@ -214,10 +214,10 @@ const User = ({ users, memes }) => {
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
-        <><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
+        <div key={meme.id}><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
           <img src={meme.media} alt="" width="180" height="180"></img>
           <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
-          <Divider /></>
+          <Divider /></div>
       )}
     </div>
   )

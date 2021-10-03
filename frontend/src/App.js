@@ -35,9 +35,8 @@ import ClearIcon from '@material-ui/icons/Clear'
 import InfoIcon from '@material-ui/icons/Info'
 
 const Menu = (props) => {
-  const logged = useSelector(state => state.loggedIn)
   const users = useSelector(state => state.users)
-  const username = logged.username
+  const username = props.logged.username
   let thisUser = {
     username: '0'
   }
@@ -178,6 +177,8 @@ const App = () => {
         }, 3000)
       })
   }
+
+  const logged = useSelector(state => state.loggedIn)
 
   const NewPost = () => {
 
@@ -419,7 +420,7 @@ const App = () => {
             flexDirection: 'column',
             alignItems: 'center',
           }}>
-            <Menu handleLogout={handleLogout} />
+            <Menu handleLogout={handleLogout} logged={logged}/>
             <Switch>
               <Route path="/memes/:id">
                 <MemeInfo memes={memes} />
@@ -436,7 +437,7 @@ const App = () => {
               <Route path="/newpost"><NewPost></NewPost></Route>
 
               <Route path="/users/:id">
-                <User users={users} memes={memes}/>
+                <User users={users} memes={memes} logged={logged}/>
               </Route>
 
               <Route path="/users">
@@ -451,7 +452,7 @@ const App = () => {
                           ? (
                             <TableRow key={user.id}>
                               <TableCell>
-                                <p><Avatar alt={user.username} src={user.avatar} /><Link to={`../users/${user.id}`}>{user.username}</Link></p>
+                                <span><Avatar alt={user.username} src={user.avatar} /><Link to={`../users/${user.id}`}>{user.username}</Link></span>
                               </TableCell>
                               <TableCell><ControlPointIcon />Activity points: {Math.abs(user.memes.length * 3) + getLikes(user) + getComments(user)}</TableCell>
                               <TableCell><ImageIcon />posts: {user.memes.length}</TableCell>

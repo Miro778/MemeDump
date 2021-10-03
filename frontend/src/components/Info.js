@@ -87,7 +87,7 @@ const Info = () => {
          Select a type from 'Suggestion', 'Bug Report' or 'Other issue' and write a description.</p>
         <form onSubmit={sendTicket}>
           <div style={{ marginBottom: 30, marginTop: 20 }}>
-            <label for="types">Choose a type for your ticket: </label>
+            <label htmlFor="types">Choose a type for your ticket: </label>
             <select name="types" id="types" onChange={setType}>
               <option value="Suggestion">Suggestion</option>
               <option value="Bug Report">Bug Report</option>

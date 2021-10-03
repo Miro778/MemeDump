@@ -96,7 +96,7 @@ const Login = (props) => {
 
     return (
       <div>
-        <Link href="#" variant="body2" fullwidth sx={{ mt: 3, mb: 2 }} onClick={handleOpen}>{'Don\'t have an account? Sign Up'}</Link>
+        <Link href="#" variant="body2" sx={{ mt: 3, mb: 2 }} onClick={handleOpen}>{'Don\'t have an account? Sign Up'}</Link>
         <Modal
           open={open}
           onClose={handleClose}
@@ -166,7 +166,6 @@ const Login = (props) => {
                 <TextField label="username"
                   margin="normal"
                   required
-                  fullWidth
                   autoComplete="username"
                   autoFocus
                   id='username'
@@ -180,7 +179,6 @@ const Login = (props) => {
                 <TextField label="password"
                   margin="normal"
                   required
-                  fullWidth
                   autoComplete="current-password"
                   id='password'
                   type="password"
@@ -190,7 +188,6 @@ const Login = (props) => {
                 />
               </div>
               <Button
-                fullWidth
                 sx={{ mt: 3, mb: 2 }}
                 variant="contained"
                 color="primary"
