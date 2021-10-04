@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 
 const memeSchema = mongoose.Schema({
   title: String,
-  media: String,
+  media: {
+    type: String,
+    minlength: 5,
+  },
   likes: Number,
   date: String,
   user: {
@@ -11,7 +14,10 @@ const memeSchema = mongoose.Schema({
   },
   comments: [
     {
-      content: String,
+      content: {
+        type: String,
+        minlength: 1,
+      },
       user: String,
       date: String,
       avatar: String

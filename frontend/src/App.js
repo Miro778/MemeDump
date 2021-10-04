@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import MemeInfo from './components/MemeInfo'
 import Info from './components/Info'
 import Login from './components/Login'
+import NewPost from './components/NewPost'
 import memeService from './services/memes'
 import ticketService from './services/tickets'
 import loginService from './services/login'
@@ -157,6 +158,12 @@ const App = () => {
 
   const addMeme = async (event) => {
     event.preventDefault()
+
+    if (newTitle === '' || newMedia.length < 5) {
+      window.alert('Title or URL missing or not valid.')
+      return null
+    }
+
     const memeObject = {
       title: newTitle,
       media: newMedia,
@@ -445,35 +452,5 @@ const App = () => {
   )
 }
 
-
-const NewPost = (props) => {
-
-  return (
-    <div>
-      <h2>Make a post</h2>
-      <form onSubmit={props.addMeme}>
-        <div>
-          <TextField label="Title"
-            id='titleField'
-            type="text"
-            value={props.newTitle}
-            name="Title"
-            onChange={({ target }) => props.setNewTitle(target.value)}
-          />
-        </div>
-        <div>
-          <TextField label ="Image link (URL)"
-            id='urlField'
-            type="text"
-            value={props.newMedia}
-            name="Url"
-            onChange={({ target }) => props.setNewMedia(target.value)}
-          />
-        </div>
-        <Button variant="contained" color="primary" id='submitMeme-button' type="submit">create</Button>
-      </form>
-    </div>
-  )
-}
 
 export default App

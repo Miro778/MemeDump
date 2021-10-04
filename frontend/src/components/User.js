@@ -116,6 +116,11 @@ const User = ({ users, memes, logged }) => {
     const setAvatarByURL = async (event) => {
       event.preventDefault()
 
+      if (newAvatar.length < 12) {
+        window.alert('The URL doesnt seem valid.')
+        return null
+      }
+
       userService
         .updateAvatar(user, newAvatar)
         .then(returnedMeme => {

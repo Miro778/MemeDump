@@ -43,6 +43,11 @@ const Login = (props) => {
   const registerUser = async (event) => {
     event.preventDefault()
 
+    if (newUsername.length < 3 || newPassword.length < 4 ) {
+      window.alert('Cannot register a user with given details. The username must be longer than 2 letters and password longer than 3 letters.')
+      return null
+    }
+
     let registeringUser = {
       username: newUsername,
       password: newPassword,

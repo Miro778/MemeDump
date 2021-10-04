@@ -44,6 +44,19 @@ memesRouter.get('/:id/comments', (request, response, next) => {
 })
 
 memesRouter.post('/', async (request, response) => {
+
+  if (!(request.body.title)) {
+    console.log('title missing')
+    return response.status(400).json({
+      error: 'Title missing' }
+    )}
+
+  if (!(request.body.media)) {
+    console.log('image missing')
+    return response.status(400).json({
+      error: 'Image missing' }
+    )}
+
   const meme = new Meme(request.body)
 
   var today = new Date(),

@@ -20,6 +20,12 @@ const Info = () => {
   const [ticketContent, setTicketContent] = useState('')
 
   const sendTicket = async (event) => {
+    event.preventDefault()
+
+    if (ticketContent.length < 10) {
+      window.alert('The text is too short.')
+      return null
+    }
 
     const ticketObject = {
       content: ticketContent,
@@ -33,9 +39,10 @@ const Info = () => {
       .then(returnedTicket => {
         setTicketType('')
         setTicketContent('')
-        alert('Your ticket has been submitted.')
+        window.alert('Your ticket has been submitted.')
       })
 
+    window.location.reload()
   }
 
   function setType()

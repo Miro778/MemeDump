@@ -50,6 +50,11 @@ const MemeInfo = ({ memes }) => {
 
   const addComment = async (event) => {
     event.preventDefault()
+
+    if (newComment === '') {
+      window.alert('Text required')
+      return null
+    }
     const commentObject = {
       content: newComment
     }
