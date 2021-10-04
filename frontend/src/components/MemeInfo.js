@@ -74,29 +74,25 @@ const MemeInfo = ({ memes }) => {
       <h2>Comments</h2>
       <List className={classes.root}>
         {comments.map(comment =>
-          <ListItem alignItems="flex-start">
-
-            <ListItemAvatar>
-              <Avatar src={comment.avatar} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={comment.content}
-              secondary={
-                <Typography
+          <div key={comment.content}>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar src={comment.avatar} />
+              </ListItemAvatar>
+              <ListItemText
+                primary={comment.content}
+                secondary={<Typography
                   component="span"
                   variant="body2"
                   className={classes.inline}
                   color="textPrimary"
                 >
-                  {comment.user} , {comment.date}
-                </Typography>
-              }
-            />
+                  {comment.user}, {comment.date}
+                </Typography>} />
+            </ListItem>
             <Divider variant="inset" component="li" />
-          </ListItem>
-
+          </div>
         )}
-
       </List>
       <div>
         <form onSubmit={addComment}>

@@ -69,72 +69,6 @@ const Login = (props) => {
     window.location.reload()
   }
 
-  function RegisterModal() {
-
-    function getModalStyle() {
-      const top = 50
-      const left = 50
-
-      return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-      }
-    }
-
-    const classesModal = modalStyles()
-    const [modalStyle] = React.useState(getModalStyle)
-    const [open, setOpen] = React.useState(false)
-
-    const handleOpen = () => {
-      setOpen(true)
-    }
-
-    const handleClose = () => {
-      setOpen(false)
-    }
-
-    return (
-      <div>
-        <Link href="#" variant="body2" sx={{ mt: 3, mb: 2 }} onClick={handleOpen}>{'Don\'t have an account? Sign Up'}</Link>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          <div style={modalStyle} className={classesModal.paper}>
-            <form onSubmit={registerUser}>
-              <h2 id="simple-modal-title">Create a new account</h2>
-              <div>
-                <TextField label="Username"
-                  id='usernameField'
-                  type="text"
-                  value={newUsername}
-                  name="Title"
-                  onChange={({ target }) => setNewUsername(target.value)}
-                />
-              </div>
-              <div>
-                <TextField label="Password"
-                  id='passwordField'
-                  type="text"
-                  value={newPassword}
-                  name="Title"
-                  onChange={({ target }) => setNewPassword(target.value)}
-                />
-              </div>
-              <div>
-                <Button variant="contained" color="primary" id='submitUser-button' type="submit">Submit</Button>
-                <Button variant="contained" color="primary" id='submitUser-button' onClick={handleClose}>Close</Button>
-              </div>
-            </form>
-          </div>
-        </Modal>
-      </div>
-    )
-  }
-
   document.body.style.backgroundColor = 'orange'
 
   return (
@@ -194,12 +128,79 @@ const Login = (props) => {
                 id='login-button'
                 type="submit"
               >Login</Button>
-              <RegisterModal />
+              <RegisterModal registerUser={registerUser} newUsername={newUsername} setNewUsername={setNewUsername} newPassword={newPassword} setNewPassword={setNewPassword}/>
             </Box>
           </div>
         </Box>
       </Container>
     </ThemeProvider>
+  )
+}
+
+
+const RegisterModal = (props) => {
+
+  function getModalStyle() {
+    const top = 50
+    const left = 50
+
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    }
+  }
+
+  const classesModal = modalStyles()
+  const [modalStyle] = React.useState(getModalStyle)
+  const [open, setOpen] = React.useState(false)
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  return (
+    <div>
+      <Link href="#" variant="body2" sx={{ mt: 3, mb: 2 }} onClick={handleOpen}>{'Don\'t have an account? Sign Up'}</Link>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div style={modalStyle} className={classesModal.paper}>
+          <form onSubmit={props.registerUser}>
+            <h2 id="simple-modal-title">Create a new account</h2>
+            <div>
+              <TextField label="Username"
+                id='usernameField'
+                type="text"
+                value={props.newUsername}
+                name="Title"
+                onChange={({ target }) => props.setNewUsername(target.value)}
+              />
+            </div>
+            <div>
+              <TextField label="Password"
+                id='passwordField'
+                type="text"
+                value={props.newPassword}
+                name="Title"
+                onChange={({ target }) => props.setNewPassword(target.value)}
+              />
+            </div>
+            <div>
+              <Button variant="contained" color="primary" id='submitUser-button' type="submit">Submit</Button>
+              <Button variant="contained" color="primary" id='submitUser-button' onClick={handleClose}>Close</Button>
+            </div>
+          </form>
+        </div>
+      </Modal>
+    </div>
   )
 }
 
