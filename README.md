@@ -31,3 +31,4 @@ todo
 | 27.9 |  2   | Tehty backend ticketille. Laitettu meemiin sivulle linkki tekijän profiiliin. Profiilisivu näyttää meemien listassa myös jokaisen meemin kuvan, tykkäysten ja kommenttien määrän.
 | 28.9 |  3   | Tehty tickettien lähetys sovelluksesta mahdolliseksi. Korjattu varoituksia joita ilmeni koodissa.  Muutettu navigointipalkissa 'My Profile' tärkeäksi, ja laitettu 'Info & Support' vähemmän tärkeäksi.
 | 1.10 |  1   | Tehty mahdollisuus poistaa omia meemejä oman profiilisivun kautta.
+| 3.10 |  1   | Käyty läpi eri käyttöliittymän toimintoja ja tarkasteltu konsolia varoituksien varalta. Löydetty 5, jotka selvitetty ja korjattu.
