@@ -32,3 +32,4 @@ todo
 | 28.9 |  3   | Tehty tickettien lähetys sovelluksesta mahdolliseksi. Korjattu varoituksia joita ilmeni koodissa.  Muutettu navigointipalkissa 'My Profile' tärkeäksi, ja laitettu 'Info & Support' vähemmän tärkeäksi.
 | 1.10 |  1   | Tehty mahdollisuus poistaa omia meemejä oman profiilisivun kautta.
 | 3.10 |  1   | Käyty läpi eri käyttöliittymän toimintoja ja tarkasteltu konsolia varoituksien varalta. Löydetty 5, jotka selvitetty ja korjattu.
+| 4.10 |  1   | Korjattu tekstikenttien bugisuus luodessa uutta käyttäjää ja postausta.
