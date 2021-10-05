@@ -33,3 +33,4 @@ todo
 | 1.10 |  1   | Tehty mahdollisuus poistaa omia meemejä oman profiilisivun kautta.
 | 3.10 |  1   | Käyty läpi eri käyttöliittymän toimintoja ja tarkasteltu konsolia varoituksien varalta. Löydetty 5, jotka selvitetty ja korjattu.
 | 4.10 |  1   | Korjattu tekstikenttien bugisuus luodessa uutta käyttäjää ja postausta.
+|      |  2   | Refaktoroitu koodia siirtämällä App.js tiedostosta NewPost-komponentti omaan tiedostoon. Tehty sekä frontend ja backend tarkastamaan vastaanotetun datan validius rekisteröitäessä käyttäjää, tehdessä uutta postausta, kommentoidessa ja lähetettäessä ticketin.
