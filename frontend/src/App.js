@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import MemeInfo from './components/MemeInfo'
 import Info from './components/Info'
 import Login from './components/Login'
+import Media from './components/MediaType'
 import NewPost from './components/NewPost'
 import memeService from './services/memes'
 import ticketService from './services/tickets'
@@ -329,7 +330,7 @@ const App = () => {
       <ImageList className={classes.imageList}>
         {memes.map(meme =>
           <ImageListItem key={meme.id} cols={2} style={{ height: 'auto' }}>
-            <img src={meme.media} alt={meme.title} />
+            <Media meme={meme} id='mainPageMedia'/>
             <ImageListItemBar
               title={<span><Link to={`../memes/${meme.id}`}>{meme.title}</Link></span>}
               subtitle={<span>by {meme.user.username} on {meme.date}</span>}
@@ -354,7 +355,7 @@ const App = () => {
       <ImageList rowHeight={180} className={classes.imageList}>
         {memes.map(meme =>
           <ImageListItem key={meme.id} cols={2} style={{ height: 'auto' }}>
-            <img src={meme.media} alt={meme.title} />
+            <Media meme={meme} id='mainPageMedia'/>
             <ImageListItemBar
               title={<span><Link to={`../memes/${meme.id}`}>{meme.title}</Link></span>}
               subtitle={<span>by {meme.user.username} on {meme.date}</span>}

@@ -1,6 +1,7 @@
 import { React, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Media from './MediaType'
 import { addVote } from '../reducers/memeReducer'
 import { TextField, Button } from '@material-ui/core'
 import memeService from '../services/memes'
@@ -70,7 +71,7 @@ const MemeInfo = ({ memes }) => {
   return (
     <div>
       <h1>{meme.title}</h1>
-      <img alt="null" src={meme.media}/>
+      <Media meme={meme} />
       <p>{meme.likes} likes <Button disabled={disable} variant="contained" color="primary" onClick={() => {
         setDisable(true)
         dispatch(addVote(meme.id,meme))

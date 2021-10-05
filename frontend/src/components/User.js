@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import userService from '../services/users'
 import memeService from '../services/memes'
+import Media from './MediaType'
 import CommentIcon from '@material-ui/icons/Comment'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import Divider from '@mui/material/Divider'
@@ -204,7 +205,7 @@ const User = ({ users, memes, logged }) => {
           <IconButton onClick={() => ConfirmMemeDelete(meme.id)} aria-label="delete" size="medium">
             <DeleteForeverIcon fontSize="inherit" />
           </IconButton></p>
-        <img src={meme.media} alt="" width="180" height="180"></img>
+        <Media meme={meme} id='userPageMedia'/>
         <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
         <Divider /></div>
       )}
@@ -220,7 +221,7 @@ const User = ({ users, memes, logged }) => {
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
         <div key={meme.id}><p><Link to={`../memes/${meme.id}`}>{meme.title}</Link></p>
-          <img src={meme.media} alt="" width="180" height="180"></img>
+          <Media meme={meme} id='userPageMedia'/>
           <p>{meme.likes} <ThumbUpIcon />    {meme.comments.length} <CommentIcon /></p>
           <Divider /></div>
       )}

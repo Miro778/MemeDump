@@ -52,3 +52,12 @@ code {
   align-items: flex-start;
   margin: 20px;
 }
+
+#mainPageMedia {
+  margin-bottom: 64px;
+}
+
+#userPageMedia {
+  height: 180px;
+  width: 180px;
+}
