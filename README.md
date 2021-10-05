@@ -34,3 +34,4 @@ todo
 | 3.10 |  1   | Käyty läpi eri käyttöliittymän toimintoja ja tarkasteltu konsolia varoituksien varalta. Löydetty 5, jotka selvitetty ja korjattu.
 | 4.10 |  1   | Korjattu tekstikenttien bugisuus luodessa uutta käyttäjää ja postausta.
 |      |  2   | Refaktoroitu koodia siirtämällä App.js tiedostosta NewPost-komponentti omaan tiedostoon. Tehty sekä frontend ja backend tarkastamaan vastaanotetun datan validius rekisteröitäessä käyttäjää, tehdessä uutta postausta, kommentoidessa ja lähetettäessä ticketin.
+| 5.10 |  2   | Tehty uusi komponentti MediaType, joka tarkastaa onko Meme-objektin media .mp4 tiedosto. Tällöin komponentti palauttaa <video>:n <img> sijaan. Lisätty komponentti kaikille sivuille, joilla meemejä voi nähdä, ja katsottu että mp4 tiedostot toimivat oikein käyttöliittymässä.
