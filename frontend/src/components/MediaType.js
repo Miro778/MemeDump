@@ -4,7 +4,7 @@ const Media = (props) => {
 
   var mediaType = props.meme.media.substr(props.meme.media.lastIndexOf('.') + 1)
 
-  if ( mediaType === 'mp4' ) {
+  if ( mediaType === 'mp4' || mediaType === 'webm' ) {
     return (
       <video id={props.id} controls>
         <source src={props.meme.media} type='video/mp4' />
