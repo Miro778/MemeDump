@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3003/api/tickets'
+const baseUrl = '/api/tickets'
 
 let token = null
 

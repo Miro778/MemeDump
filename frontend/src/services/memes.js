@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3003/api/memes'
+const baseUrl = '/api/memes'
 
 let token = null
 
@@ -22,7 +22,7 @@ const create = async newObject => {
 }
 
 const update = (id, newObject) => {
-  const request = axios.put(`http://localhost:3003/api/memes/${id}`, newObject)
+  const request = axios.put(`/api/memes/${id}`, newObject)
   return request.then(response => response.data)
 }
 
@@ -31,7 +31,7 @@ const remove = (id) => {
     headers: { Authorization: token },
   }
 
-  const request = axios.delete(`http://localhost:3003/api/memes/${id}`,config)
+  const request = axios.delete(`/api/memes/${id}`,config)
   return request.then(response => response.data)
 }
 

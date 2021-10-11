@@ -154,7 +154,7 @@ const App = () => {
   const handleLogout = async () => {
     window.localStorage.removeItem('loggedMemeAppUser')
     dispatch(logOut())
-    window.location.reload()
+    window.location.href = '/'
   }
 
   const addMeme = async (event) => {

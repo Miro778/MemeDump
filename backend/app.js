@@ -21,13 +21,14 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .catch((error) => {
     logger.error('error connection to MongoDB:', error.message)
   })
-
+/**
 app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
-})
+}) */
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static('build'))
 app.use(middleware.requestLogger)
 app.use('/api/users', usersRouter)
 app.use('/api/memes', memesRouter)
