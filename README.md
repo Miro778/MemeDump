@@ -38,3 +38,4 @@ todo
 | 10.10|  4   | Saatu backend toimimaan internetissä herokulla. Vastaan tuli lukuisia ongelmia herokuun liittyen. Aluksi selvitetty, miten repositorion alemmasta kansiosta saadaan luotua heroku-sovellus. Tämä ei kuitenkaan onnistunut heti, vaan konsoli ilmoitti lukuisista virheistä. Luettu ohjeita netistä ja selvitetty ongelmaa, jonka johdosta tehty muutoksia moduuleihin, package.jsoniin yms. Lopulta saatu errorit korjattua ja backend internettiin.
 | 11.10|  2   | Muutoksia backendiin ja frontendiin, jotta se toimii ns. single page appina. Tehty frontendin tuotantoversio ja lisätty backendiin, testattu kokonaisuus toimivaksi herokussa.
 | 12.10| 0,5  | Eritelty avatarin päivityksessä tiedoston upload omaksi komponentiksi, joka on toistaiseksi poissa käytöstä.
+|      |  2   | Lisätty tarpeellista dokumentaatiota Frontendiin.
