@@ -39,3 +39,4 @@ todo
 | 11.10|  2   | Muutoksia backendiin ja frontendiin, jotta se toimii ns. single page appina. Tehty frontendin tuotantoversio ja lisätty backendiin, testattu kokonaisuus toimivaksi herokussa.
 | 12.10| 0,5  | Eritelty avatarin päivityksessä tiedoston upload omaksi komponentiksi, joka on toistaiseksi poissa käytöstä.
 |      |  2   | Lisätty tarpeellista dokumentaatiota Frontendiin.
+|      |  1,5 | Refaktoroitu frontendin koodia ja vähennetty toisteisuutta lisäämällä functions.js tiedosto, jonne siirretty sekä App.js ja user.js tiedostoissa käytettyjä funktioita. Lisätty myös Menu omaksi komponentikseen App.js tiedostosta.
