@@ -26,6 +26,12 @@ const modalStyles = makeStyles((theme) => ({
   },
 }))
 
+/**
+ * Esittää käyttäjän sivun. Mikäli sivu tunnistetaan kirjautuneen käyttäjän omaksi sivuksi, sisältää se mahdollisuuden muuttaa avataria ja poistaa omia meemejä.
+ * @param users kaikki sovelluksen käyttäjät
+ * @param memes kaikki sovelluksen meemit
+ * @param logged kirjautunut käyttäjä
+ */
 const User = ({ users, memes, logged }) => {
 
   console.log('logged: ' , logged)
@@ -54,6 +60,11 @@ const User = ({ users, memes, logged }) => {
     }
   }
 
+  /**
+   * Laskee parametrina annetun käyttäjän kaikkien meemien tykkäykset.
+   * @param user käyttäjä, jonka tykkäykset lasketaan.
+   * @returns parametrina annetun käyttäjän kaikkien meemien tykkäysten summa.
+   */
   function getLikes( user ) {
 
     var likes = 0
@@ -64,6 +75,11 @@ const User = ({ users, memes, logged }) => {
     return likes
   }
 
+  /**
+   * Laskee parametrina annetun käyttäjän kaikkien meemien kommenttien määrän.
+   * @param user käyttäjä, jonka meemien kommenttien määrä lasketaan.
+   * @returns parametrina annetun käyttäjän kaikkien meemien kommenttien määrä.
+   */
   function getComments( user ) {
 
     var comments = 0
@@ -76,6 +92,11 @@ const User = ({ users, memes, logged }) => {
     return comments
   }
 
+  /**
+   * Selvittää, mikä sija (indeksi) käyttäjien listassa parametrinä annetulla käyttäjällä on, ja palauttaa siten kyseisen sijan (indeksin)
+   * @param user käyttäjä, jonka sija palautetaan.
+   * @returns parametrinä annetun käyttäjän indeksi. Jos käyttäjää ei löydy, palautetaan viimeisenä käyttäjien listalla olevan indeksi.
+   */
   function getRank( user ) {
 
     for (var i = 0; i < users.length; i++) {
@@ -114,6 +135,9 @@ const User = ({ users, memes, logged }) => {
       setOpen(false)
     }
 
+    /**
+     * Lähettää userServicen kautta PUT-requestin, jossa käyttäjäobjektille asetetaan uudeksi median arvoksi newAvatarin arvo.
+     */
     const setAvatarByURL = async (event) => {
       event.preventDefault()
 
@@ -132,13 +156,6 @@ const User = ({ users, memes, logged }) => {
           )
         })
       window.location.reload()
-    }
-
-    const setAvatarByFile = async (event) => {
-      const data = new FormData()
-      data.append('name','name')
-      data.append('file', file)
-      userService.updateAvatarByFile(user, data)
     }
 
     return (
@@ -214,6 +231,11 @@ const User = ({ users, memes, logged }) => {
   )
 }
 
+/**
+ * Kysyy käyttäjältä varmistuksen meemin poistamisesta, ja toimii saadun vastauksen perusteella.
+ * @param id käsiteltävän meemin id.
+ * @returns jos vastaus=ok: poistaa meemin parametrinä annetun id:n perusteella ja palauttaa true. Jos vastaus=peruuta: palauttaa false.
+ */
 function ConfirmMemeDelete(id)
 {
   // eslint-disable-next-line no-restricted-globals
@@ -226,6 +248,9 @@ function ConfirmMemeDelete(id)
     return false
 }
 
+/**
+ * Mikäli avatar voidaan päivittää tiedoston lataamisen perusteella, palauttaa tämä komponentti mahdollisuuden toteuttaa sen käyttöliittymän kautta.
+ */
 const ModalUploadOption = () => {
   const fileUploadIncluded = false
   if (!fileUploadIncluded) return null

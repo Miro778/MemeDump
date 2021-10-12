@@ -49,6 +49,9 @@ const MemeInfo = ({ memes }) => {
 
   const comments = meme.comments
 
+  /**
+   * Luo kommenttiobjektin newCommentin mukaisesti, ja tekee sen perusteella POST-requestin memeServicen kautta.
+   */
   const addComment = async (event) => {
     event.preventDefault()
 

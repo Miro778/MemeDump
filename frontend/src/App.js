@@ -36,6 +36,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import ClearIcon from '@material-ui/icons/Clear'
 import InfoIcon from '@material-ui/icons/Info'
 
+// Navigointipalkki
 const Menu = (props) => {
   const users = useSelector(state => state.users)
   const username = props.logged.username
@@ -126,6 +127,9 @@ const App = () => {
     },
   })
 
+  /**
+   * Lähettää loginServicen kautta POST-requestin annetun usernamen ja passwordin mukaan, ja asettaa käyttäjän vastauksen perusteella.
+   */
   const handleLogin = async (event) => {
     event.preventDefault()
 
@@ -151,12 +155,18 @@ const App = () => {
 
   }
 
+  /**
+   * Ilmoittaa localStoragelle, että käyttäjä kirjautuu ulos ja vie takaisin kirjautumissivulle.
+   */
   const handleLogout = async () => {
     window.localStorage.removeItem('loggedMemeAppUser')
     dispatch(logOut())
     window.location.href = '/'
   }
 
+  /**
+   * Luo meemiobjektin newTitlen ja newMedian perusteella, ja lähettää niillä memeServicen avulla POST-requestin.
+   */
   const addMeme = async (event) => {
     event.preventDefault()
 
@@ -260,6 +270,11 @@ const App = () => {
     )
   }
 
+  /**
+   * Laskee parametrina annetun käyttäjän kaikkien meemien tykkäykset.
+   * @param user käyttäjä, jonka tykkäykset lasketaan.
+   * @returns parametrina annetun käyttäjän kaikkien meemien tykkäysten summa.
+   */
   function getLikes( user ) {
 
     var likes = 0
@@ -270,6 +285,11 @@ const App = () => {
     return likes
   }
 
+  /**
+   * Laskee parametrina annetun käyttäjän kaikkien meemien kommenttien määrän.
+   * @param user käyttäjä, jonka meemien kommenttien määrä lasketaan.
+   * @returns parametrina annetun käyttäjän kaikkien meemien kommenttien määrä.
+   */
   function getComments( user ) {
 
     var comments = 0
@@ -282,6 +302,12 @@ const App = () => {
     return comments
   }
 
+  /**
+   * Vertailee kahden objektin tykkäyksiä keskenään.
+   * @param a ensimmäinen vertailtava objekti
+   * @param b toinen vertailtava objekti
+   * @returns -1 jos a:n tykkäykset suuremmat. 1 jos b:n tykkäykset suuremmat. 0 jos yhtäsuuret.
+   */
   function compareByLikes( a, b ) {
     if ( a.likes > b.likes ){
       return -1
@@ -291,6 +317,16 @@ const App = () => {
     }
     return 0
   }
+
+  /**
+   * Vertailee kahden käyttäjän pisteitä keskenään. Pisteet lasketaan seuraavasti:
+   * Käyttäjän meemien lukumäärä * 3
+   * + Käyttäjän meemien saamien tykkäysten määrä
+   * + Käyttäjän kommenttien määrä
+   * @param a ensimmäinen vertailtava objekti
+   * @param b toinen vertailtava objekti
+   * @returns -1 jos a:n pisteet suuremmat. 1 jos b:n pisteet suuremmat. 0 jos yhtäsuuret.
+   */
 
   function compareByPoints( a, b ) {
     if ( Math.abs(a.memes.length * 3) + getLikes(a) + getComments(a) > Math.abs(b.memes.length * 3) + getLikes(b) + getComments(b) ){
@@ -302,13 +338,23 @@ const App = () => {
     return 0
   }
 
-  // parse a date in yyyy-mm-dd format
+  /**
+   * Muuttaa String-muotoisen päivämäärän ilmaisun Date-muotoon.
+   * @param input Päivämäärä String-muodossa.
+   * @return päivämäärä Date-muodossa.
+  */
   function parseDate(input) {
     var parts = input.match(/(\d+)/g)
 
     return new Date(parts[0], parts[1]-1, parts[2])
   }
 
+  /**
+   * Vertailee kahden objektin päivämääriä keskenään.
+   * @param a ensimmäinen vertailtava objekti
+   * @param b toinen vertailtava objekti
+   * @returns -1 jos a:n päivämäärä uudempi. 1 jos b:n päivämäärä uudempi. 0 jos sama päivämäärä.
+   */
   function compareByDate( a, b ) {
     var date1 = parseDate(a.date)
     var date2 = parseDate(b.date)

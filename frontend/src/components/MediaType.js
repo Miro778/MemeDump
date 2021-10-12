@@ -1,5 +1,10 @@
 import '../index.css'
 
+/**
+ * Tarkastaa, onko meemin media video vai kuva, ja palauttaa sen perusteella kuvan/videon sopivassa muodossa.
+ * @param {meme.media} props meemin media.
+ * @returns media sopivassa muodossa.
+ */
 const Media = (props) => {
 
   var mediaType = props.meme.media.substr(props.meme.media.lastIndexOf('.') + 1)

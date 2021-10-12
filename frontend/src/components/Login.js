@@ -39,7 +39,9 @@ const Login = (props) => {
       </div>
     )
   }
-
+  /**
+   * Luo käyttäjäolion newUsernamen ja newPasswordin perusteella mikäli ne ovat valideja, ja lähettää userServicen kautta POST-requestin userServicen kautta.
+   */
   const registerUser = async (event) => {
     event.preventDefault()
 

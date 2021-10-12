@@ -19,6 +19,10 @@ const Info = () => {
   const [ticketType, setTicketType] = useState('suggestion')
   const [ticketContent, setTicketContent] = useState('')
 
+  /**
+   * Muodostaa ticketContentin ja ticketTypen perusteella ticketObjectin, mikäli näiden sisältö on validia. Lähettää näiden perusteella POST-requestin
+   * ticketServicen kautta.
+   */
   const sendTicket = async (event) => {
     event.preventDefault()
 
@@ -45,12 +49,18 @@ const Info = () => {
     window.location.reload()
   }
 
+  /**
+   * Asettaa ticketTypen arvoksi valitun arvon
+   */
   function setType()
   {
     var selectedValue = document.getElementById('types').value
     setTicketType(selectedValue)
   }
 
+  /**
+   * Asettaa ticketContentin arvoksi tekstikenttään kirjoitetun tekstin
+   */
   function setContent()
   {
     var selectedValue = document.getElementById('ticketContent').value
