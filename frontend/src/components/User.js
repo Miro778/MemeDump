@@ -166,22 +166,7 @@ const User = ({ users, memes, logged }) => {
                 <Button variant="contained" color="primary" id='submitAvatar-button' type="submit">Submit</Button>
               </div>
             </form>
-            <h2 id="simple-modal-title">..Or upload a jpg file</h2>
-            <form action="http://localhost:3003/api/upload" method="post" enctype="multipart/form-data">
-              <div className="flex">
-                <label htmlFor="file">File</label>
-                <input
-                  name="avatar"
-                  type="file"
-                  id="file"
-                  accept=".jpg"
-                  multiple
-                />
-              </div>
-              <div>
-                <Button variant="contained" color="primary" id='submitAvatar-button' type="submit">Submit</Button>
-              </div>
-            </form>
+            <ModalUploadOption />
           </div>
         </Modal>
       </div>
@@ -239,6 +224,31 @@ function ConfirmMemeDelete(id)
     return true
   } else
     return false
+}
+
+const ModalUploadOption = () => {
+  const fileUploadIncluded = false
+  if (!fileUploadIncluded) return null
+  return (
+    <div>
+      <h2 id="simple-modal-title">..Or upload a jpg file</h2>
+      <form action="http://localhost:3003/api/upload" method="post" enctype="multipart/form-data">
+        <div className="flex">
+          <label htmlFor="file">File</label>
+          <input
+            name="avatar"
+            type="file"
+            id="file"
+            accept=".jpg"
+            multiple
+          />
+        </div>
+        <div>
+          <Button variant="contained" color="primary" id='submitAvatar-button' type="submit">Submit</Button>
+        </div>
+      </form>
+    </div>
+  )
 }
 
 
