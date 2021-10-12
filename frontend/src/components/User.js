@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import userService from '../services/users'
 import memeService from '../services/memes'
 import Media from './MediaType'
+import Function from '../functions'
 import CommentIcon from '@material-ui/icons/Comment'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import Divider from '@mui/material/Divider'
@@ -60,50 +61,6 @@ const User = ({ users, memes, logged }) => {
     }
   }
 
-  /**
-   * Laskee parametrina annetun käyttäjän kaikkien meemien tykkäykset.
-   * @param user käyttäjä, jonka tykkäykset lasketaan.
-   * @returns parametrina annetun käyttäjän kaikkien meemien tykkäysten summa.
-   */
-  function getLikes( user ) {
-
-    var likes = 0
-
-    for (var i = 0; i < memes.length; i++) {
-      if (memes[i].user.id === user.id) likes = likes + memes[i].likes
-    }
-    return likes
-  }
-
-  /**
-   * Laskee parametrina annetun käyttäjän kaikkien meemien kommenttien määrän.
-   * @param user käyttäjä, jonka meemien kommenttien määrä lasketaan.
-   * @returns parametrina annetun käyttäjän kaikkien meemien kommenttien määrä.
-   */
-  function getComments( user ) {
-
-    var comments = 0
-
-    for (var i = 0; i < memes.length; i++) {
-      for (var j = 0; j < memes[i].comments.length; j++) {
-        if (memes[i].comments[j].user === user.username) comments++
-      }
-    }
-    return comments
-  }
-
-  /**
-   * Selvittää, mikä sija (indeksi) käyttäjien listassa parametrinä annetulla käyttäjällä on, ja palauttaa siten kyseisen sijan (indeksin)
-   * @param user käyttäjä, jonka sija palautetaan.
-   * @returns parametrinä annetun käyttäjän indeksi. Jos käyttäjää ei löydy, palautetaan viimeisenä käyttäjien listalla olevan indeksi.
-   */
-  function getRank( user ) {
-
-    for (var i = 0; i < users.length; i++) {
-      if (users[i] === user) return i+1
-    }
-    return users.length-1
-  }
 
   // =================================  Modal Build =================================
 
@@ -199,7 +156,7 @@ const User = ({ users, memes, logged }) => {
       </div>
       <SimpleModal />
       <h1>{user.username}</h1>
-      <p>Activity points: {Math.abs(user.memes.length * 3) + getLikes(user) + getComments(user)}, <b>Rank: #{getRank(user)}</b></p>
+      <p>Activity points: {Math.abs(user.memes.length * 3) + Function.getLikes(user,memes) + Function.getComments(user,memes)}, <b>Rank: #{Function.getRank(user, users)}</b></p>
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
@@ -218,7 +175,7 @@ const User = ({ users, memes, logged }) => {
     <div>
       <img alt="null" src={user.avatar} width="300" height="300"/>
       <h1>{user.username}</h1>
-      <p>Activity points: {Math.abs(user.memes.length * 3) + getLikes(user) + getComments(user)}, <b>Rank: #{getRank(user)}</b></p>
+      <p>Activity points: {Math.abs(user.memes.length * 3) + Function.getLikes(user,memes) + Function.getComments(user,memes)}, <b>Rank: #{Function.getRank(user, users)}</b></p>
       <p>Joined in {user.joined}</p>
       <h2>Added memes</h2>
       {theseMemes.map(meme =>
