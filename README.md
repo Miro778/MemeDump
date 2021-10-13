@@ -40,3 +40,4 @@ todo
 | 12.10| 0,5  | Eritelty avatarin päivityksessä tiedoston upload omaksi komponentiksi, joka on toistaiseksi poissa käytöstä.
 |      |  2   | Lisätty tarpeellista dokumentaatiota Frontendiin.
 |      |  1,5 | Refaktoroitu frontendin koodia ja vähennetty toisteisuutta lisäämällä functions.js tiedosto, jonne siirretty sekä App.js ja user.js tiedostoissa käytettyjä funktioita. Lisätty myös Menu omaksi komponentikseen App.js tiedostosta.
+| 13.10|  3   | Käyttäjien hakupalkki toimi virheellisesti, joten siirretty se App.js:sta omaksi komponentiksi. Hakupalkki ei kuitenkaan toiminut, sillä konsoli ilmoitti virheestä liittyen UseStaten käyttöön renderöidessä erillistä komponenttia. Debugattu, ja yritetty löytää ratkaisua eri keinoin pitkään. Lopulta onnistuttu korjaamaan virhe tekemällä App.js sisään metodi setFilterData joka käyttää setFilteriä. Täten viety propsien avulla UserSearchBariin tämä metodi itse setFilterin sijaan.
