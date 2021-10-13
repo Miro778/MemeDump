@@ -6,6 +6,7 @@ import Info from './components/Info'
 import Login from './components/Login'
 import Media from './components/MediaType'
 import NewPost from './components/NewPost'
+import UserSearchBar from './components/UserSearchBar'
 import memeService from './services/memes'
 import ticketService from './services/tickets'
 import loginService from './services/login'
@@ -19,7 +20,7 @@ import {
   BrowserRouter as Router,
   Switch, Route, Link } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
-import { TableContainer, Table, TableCell, TableRow, TableBody, Paper, TextField, IconButton, makeStyles, ImageListItem, ImageList, ImageListItemBar, Avatar, createTheme, ThemeProvider } from '@material-ui/core'
+import { TableContainer, Table, TableCell, TableRow, TableBody, Paper, IconButton, makeStyles, ImageListItem, ImageList, ImageListItemBar, Avatar, createTheme, ThemeProvider } from '@material-ui/core'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import { Alert } from '@material-ui/lab'
 import { green, orange } from '@material-ui/core/colors'
@@ -28,8 +29,6 @@ import ImageIcon from '@material-ui/icons/Image'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import CommentIcon from '@material-ui/icons/Comment'
 import ControlPointIcon from '@material-ui/icons/ControlPoint'
-import SearchIcon from '@material-ui/icons/Search'
-import ClearIcon from '@material-ui/icons/Clear'
 
 
 const App = () => {
@@ -38,7 +37,7 @@ const App = () => {
   const [newMedia, setNewMedia] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [ filter, setFilter] = useState('')
+  const [filter, setFilter] = useState('')
   const [user, setUser] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -49,6 +48,10 @@ const App = () => {
 
   users.sort( compareByPoints )
 
+  const setFilterData = (data) => {
+    setTimeout(() => setFilter(data), 0)
+  }
+
   /**
    * Vertailee kahden käyttäjän pisteitä keskenään. Pisteet lasketaan seuraavasti:
    * Käyttäjän meemien lukumäärä * 3
@@ -58,7 +61,6 @@ const App = () => {
    * @param b toinen vertailtava objekti
    * @returns -1 jos a:n pisteet suuremmat. 1 jos b:n pisteet suuremmat. 0 jos yhtäsuuret.
    */
-
   function compareByPoints( a, b ) {
     if ( Math.abs(a.memes.length * 3) + Function.getLikes(a, memes) + Function.getComments(a, memes) > Math.abs(b.memes.length * 3) + Function.getLikes(b, memes) + Function.getComments(b, memes) ){
       return -1
@@ -202,43 +204,6 @@ const App = () => {
 
   const classes = useStyles()
 
-  const handleFilter = (event) => {
-    setFilter(event.target.value)
-    console.log('Filter: ' , filter)
-  }
-
-  const clearSearch = () => {
-    setFilter('')
-    console.log('Filter: ' , filter)
-  }
-
-  function QuickSearchToolbar() {
-    return (
-      <div className={classes.root}>
-        <TextField
-          variant="standard"
-          value={filter}
-          onChange={handleFilter}
-          placeholder="Search…"
-          className={classes.textField}
-          InputProps={{
-            startAdornment: <SearchIcon fontSize="small" />,
-            endAdornment: (
-              <IconButton
-                title="Clear"
-                aria-label="Clear"
-                size="small"
-                onClick={clearSearch}
-              >
-                <ClearIcon fontSize="small" />
-              </IconButton>
-            ),
-          }}
-        />
-      </div>
-    )
-  }
-
   const TopRatedMemeList = () => {
 
     memes.sort( Function.compareByLikes )
@@ -329,7 +294,9 @@ const App = () => {
               <Route path="/info">
                 <Info />
               </Route>
-              <Route path="/newpost"><NewPost addMeme={addMeme} newTitle={newTitle} setNewTitle={setNewTitle} newMedia={newMedia} setNewMedia={setNewMedia}></NewPost></Route>
+              <Route path="/newpost">
+                <NewPost addMeme={addMeme} newTitle={newTitle} setNewTitle={setNewTitle} newMedia={newMedia} setNewMedia={setNewMedia}></NewPost>
+              </Route>
 
               <Route path="/users/:id">
                 <User users={users} memes={memes} logged={logged}/>
@@ -337,7 +304,7 @@ const App = () => {
 
               <Route path="/users">
                 <div id='searchBar'>
-                  <QuickSearchToolbar />
+                  <UserSearchBar filter={filter} setFilterData={setFilterData} classes={classes}/>
                 </div>
                 <TableContainer component={Paper}>
                   <Table>
