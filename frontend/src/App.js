@@ -329,6 +329,9 @@ const App = () => {
                   </Table>
                 </TableContainer>
               </Route>
+              <Route path="/">
+                <TopRatedMemeList />
+              </Route>
             </Switch>
           </Box>
         </Router>

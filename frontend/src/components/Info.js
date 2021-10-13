@@ -11,6 +11,11 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ExitToApp from '@material-ui/icons/ExitToApp'
 import Button from '@material-ui/core/Button'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import { TextField } from '@material-ui/core'
 import ticketService from '../services/tickets'
 import '../index.css'
 
@@ -52,10 +57,8 @@ const Info = () => {
   /**
    * Asettaa ticketTypen arvoksi valitun arvon
    */
-  function setType()
-  {
-    var selectedValue = document.getElementById('types').value
-    setTicketType(selectedValue)
+  const setType = (event) => {
+    setTicketType(event.target.value)
   }
 
   /**
@@ -104,18 +107,31 @@ const Info = () => {
          Select a type from 'Suggestion', 'Bug Report' or 'Other issue' and write a description.</p>
         <form onSubmit={sendTicket}>
           <div style={{ marginBottom: 30, marginTop: 20 }}>
-            <label htmlFor="types">Choose a type for your ticket: </label>
-            <select name="types" id="types" onChange={setType}>
-              <option value="Suggestion">Suggestion</option>
-              <option value="Bug Report">Bug Report</option>
-              <option value="Other Issue">Other Issue</option>
-            </select>
+            <FormControl sx={{ m: 1, minWidth: 160 }}>
+              <InputLabel id="label-For-Types">Type</InputLabel>
+              <Select
+                labelId="typesLabel"
+                id="types"
+                value={ticketType}
+                label="Type"
+                onChange={setType}
+              >
+                <MenuItem value={'suggestion'}>Suggestion</MenuItem>
+                <MenuItem value={'bug report'}>Bug Report</MenuItem>
+                <MenuItem value={'other issue'}>Other Issue</MenuItem>
+              </Select>
+            </FormControl>
           </div>
           <div>
-            <p>Describe your issue below: </p>
-            <textarea rows="4" cols="50" name="ticketContent" type="text" id="ticketContent" onChange={setContent}/>
+            <TextField sx={{ minWidth: 300 }}
+              id="ticketContent"
+              label="Describe your issue here"
+              multiline
+              rows={4}
+              onChange={setContent}
+            />
           </div>
-          <div>
+          <div id='ticketSubmit'>
             <Button variant="contained" color="primary" id='submitTicket-button' type="submit">Submit</Button>
           </div>
         </form>

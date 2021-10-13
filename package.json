@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@heroku-cli/plugin-buildpacks": "^7.54.0",
-    "axios": "^0.21.1",
-    "sqlite3": "^5.0.2"
-  }
-}

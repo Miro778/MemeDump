@@ -61,3 +61,7 @@ code {
   height: 180px;
   width: 180px;
 }
+
+#ticketSubmit {
+  margin-top: 20px;
+}
