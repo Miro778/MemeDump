@@ -1,8 +1,23 @@
 # MemeDump
- A web app where users can share memes with others
+Sovellus on käynnissä osoitteessa: https://thememedump.herokuapp.com/
+
+Sovelluksen pointtina on toimia meemisivustona, jonne rekisteröityneet käyttäjät voivat julkasta videoita ja kuvia. Käyttäjät voivat tykätä ja kommentoida muiden julkaisuja.
+Käyttäjät saavat aktiivisuuspisteitä aktiivisuutensa mukaan. Jokaisesta julkaisusta käyttäjä saa 3 pistettä + 1 piste * julkaisun tykkäysten määrä. Yhden pisteen saa myös
+kommentoimalla julkaisuja.
  
 # Käyttöohje
-todo
+Uusi käyttäjä voi rekisteröityä nopeasti pääsivulta, ja kirjautumalla rekisteröinnissä annetuilla tiedoilla päästä sovellukseen.
+
+Sovelluksessa on seuraavia ominaisuuksia:
+- Kirjautuminen ja uuden käyttäjän luominen kirjautumissivulta.
+- Top-sivu näyttää julkaisut niiden saamien tykkäysten perusteella suosituimmasta alaspäin.
+- Fresh-sivu näyttää julkaisut niiden julkaisupäivämäärän perusteella uusimmasta vanhimpaan.
+- New Post -sivu mahdollistaa uuden julkaisun tekemisen. Julkaisuun kirjoitetaan teksti, sekä kuva/videotiedoston URL.
+- Users-sivu näyttää käyttäjät lajitellen ne aktiivisuuspisteiden mukaan enimmästä pienimpään. Sivulla on hakupalkki, jonka avulla sivu näyttää vain hakua vastaavat käyttäjät.
+  Klikkaamalla käyttäjää listalta näyttää se kyseisen käyttäjän profiilisuvn joka näyttää käyttäjästä tietoja sekä hänen julkaisut.
+- My Profile -sivu näyttää oman profiilisivun joka on muuten samanlainen, mutta sisältää mahdollisuuden päivittää avatar ja poistaa omia julkaisuja.
+- Info & Support -sivu sisältää tarkemmat käyttöohjeet (englanniksi). Lisäksi sivulla voi lähettää tickettejä, jos käyttäjä haluaa olla yhteydessä ylläpitäjään.
+- Logout kirjaa käyttäjän ulos. 
 
 # Tuntikirjanpito
 | päivä | aika | mitä tein  |
@@ -42,4 +57,5 @@ todo
 |      |  1,5 | Refaktoroitu frontendin koodia ja vähennetty toisteisuutta lisäämällä functions.js tiedosto, jonne siirretty sekä App.js ja user.js tiedostoissa käytettyjä funktioita. Lisätty myös Menu omaksi komponentikseen App.js tiedostosta.
 | 13.10|  3   | Käyttäjien hakupalkki toimi virheellisesti, joten siirretty se App.js:sta omaksi komponentiksi. Hakupalkki ei kuitenkaan toiminut, sillä konsoli ilmoitti virheestä liittyen UseStaten käyttöön renderöidessä erillistä komponenttia. Debugattu, ja yritetty löytää ratkaisua eri keinoin pitkään. Lopulta onnistuttu korjaamaan virhe tekemällä App.js sisään metodi setFilterData joka käyttää setFilteriä. Täten viety propsien avulla UserSearchBariin tämä metodi itse setFilterin sijaan.
 |      |  1   | Parannettu info-sivun ticketin lähetyksen kohdasta käyttöliittymää toteuttamalla syöttökenttä ja ticketin tyypin valintapalkki material-ui:n avulla.
-| yht: | 87,5 |
+|      |  0,5 | Tehty käyttöohjeet
+| yht: |  88  |
