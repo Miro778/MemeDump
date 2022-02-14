@@ -19,6 +19,11 @@ Sovelluksessa on seuraavia ominaisuuksia:
 - Info & Support -sivu sisältää tarkemmat käyttöohjeet (englanniksi). Lisäksi sivulla voi lähettää tickettejä, jos käyttäjä haluaa olla yhteydessä ylläpitäjään.
 - Logout kirjaa käyttäjän ulos. 
 
+# Video käyttöliittymästä
+
+https://user-images.githubusercontent.com/83011341/153861401-ee4cb886-3514-4fdf-aa7e-e610d3b1eb2b.mp4
+
+
 # Tuntikirjanpito
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
